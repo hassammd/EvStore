@@ -2,7 +2,7 @@
 @import "tailwindcss";
 @theme {
   --color-orange: #ff7420;
-  --color-gray: #f3f4f4;
+  --color-gray: #f8fafc;
 }
 body {
   font-family: "Poppins", sans-serif;

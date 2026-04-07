@@ -9,7 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full bg-gray">
+      <div className="w-full ">
         <div className="container mx-auto px-4">
           <nav className="flex justify-between items-center py-5">
             <div>

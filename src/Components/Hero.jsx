@@ -1,8 +1,10 @@
 import hero_left from "../assets/images/hero-left.png";
+import Navbar from "./Navbar";
 const Hero = () => {
   return (
     <>
-      <div className="py-[70px] md:py-[90px] lg:py-[100px]">
+      <div className="bg-gradient-to-r from-blue-200 to-cyan-200 pb-[70px] md:pb-[90px] lg:pb-[100px]">
+        <Navbar />
         <div className="container mx-auto px-4">
           <div className="flex flex-col-reverse md:flex-row justify-between  gap-2 items-center">
             <div className="flex flex-col gap-5 items-center md:items-start">
