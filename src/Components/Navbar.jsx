@@ -61,10 +61,26 @@ const Navbar = () => {
                 className={`${isActive ? "block" : "hidden"} w-1/2 lg:hidden absolute top-16 right-0 py-4  flex items-center justify-center bg-gray`}
               >
                 <ul className=" flex flex-col items-center justify-center gap-7">
-                  <li>Home</li>
-                  <li>About</li>
-                  <li>Products</li>
-                  <li>Contacts</li>
+                  <li>
+                    <Link to="/" onClick={() => setIsActive(false)}>
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/about"} onClick={() => setIsActive(false)}>
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/products"} onClick={() => setIsActive(false)}>
+                      Products
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/contact"} onClick={() => setIsActive(false)}>
+                      Contacts
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>

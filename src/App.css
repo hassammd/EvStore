@@ -8,7 +8,39 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-/* .container {
-  max-width: 1440px;
-  margin: 0 auto;
-} */
+@layer base {
+  h1 {
+    /* Default size (mobile) */
+    font-size: 40px;
+    @apply text-3xl;
+
+    /* Tablet (md) */
+    @media (width>=theme(--breakpoint-md)) {
+      @apply text-4xl;
+    }
+
+    /* Desktop (lg) */
+
+    @media (width>=theme(--breakpoint-lg)) {
+      @apply text-5xl;
+    }
+    /* extra large (lg) */
+    @media (width>=theme(--breakpoint-xl)) {
+      @apply text-6xl;
+    }
+  }
+
+  p {
+    /* Default size (Mobile) */
+    @apply text-base leading-relaxed text-gray-700;
+
+    /* Tablet (md) */
+    @media (width>= theme(--breakpoint-md)) {
+      @apply text-lg;
+    }
+    /* Desktop (lg) */
+    @media (width>=theme(--breakpoint-lg)) {
+      @apply text-xl;
+    }
+  }
+}

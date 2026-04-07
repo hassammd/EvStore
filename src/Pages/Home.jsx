@@ -1,9 +1,9 @@
+import Hero from "../Components/Hero";
+
 const Home = () => {
   return (
     <>
-      <div className="container mx-auto">
-        <h1>Home</h1>
-      </div>
+      <Hero />
     </>
   );
 };
