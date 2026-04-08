@@ -1,0 +1,61 @@
+const Trusted = () => {
+  const trustedBrands = [
+    {
+      id: 1,
+      logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+      name: "Google",
+    },
+    {
+      id: 2,
+      logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+      name: "IBM",
+    },
+    {
+      id: 3,
+      logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+      name: "Microsoft",
+    },
+    {
+      id: 4,
+      logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+      name: "Amazon",
+    },
+    {
+      id: 5,
+      logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
+      name: "Netflix",
+    },
+  ];
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+  };
+  return (
+    <>
+      <div className="bg-gray lg:py-[100px] md:py-[90px] sm:py-[70px] py-[50px]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-9">This is truseted section</h2>
+
+          <div className="flex items-center justify-around">
+            {trustedBrands.map((items) => {
+              return (
+                <div key={items.id}>
+                  <img
+                    className="w-[70px h-[70px] aspect-video object-contain grayscale contrast-400"
+                    src={items.logo}
+                    alt=""
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+export default Trusted;

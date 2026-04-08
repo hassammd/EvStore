@@ -13,12 +13,11 @@ function App() {
     <>
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/" element={<Layout />}>
-          <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
-        </Route>
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/" element={<Layout />}></Route>
       </Routes>
     </>
   );

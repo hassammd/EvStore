@@ -1,9 +1,10 @@
+import Hero from "../Components/Hero";
+import { heroData } from "../heroData";
+
 const About = () => {
   return (
     <>
-      <div className="container mx-auto px-4">
-        <h1>About</h1>
-      </div>
+      <Hero data={heroData.about} />
     </>
   );
 };
