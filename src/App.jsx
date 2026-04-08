@@ -7,6 +7,8 @@ import Contact from "./Pages/Contact";
 import About from "./Pages/About";
 import Products from "./Pages/Products";
 import Cart from "./Pages/Cart";
+import ThankYou from "./Pages/ThankYou";
+import ErrorPage from "./Pages/ErrorPage";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/thankyou" element={<ThankYou />} />
+        <Route path="*" element={<ErrorPage />} />
         <Route path="/" element={<Layout />}></Route>
       </Routes>
     </>

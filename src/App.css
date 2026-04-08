@@ -25,12 +25,26 @@ body {
     @media (width>=theme(--breakpoint-lg)) {
       @apply text-5xl;
     }
-    /* extra large (lg) */
+    /* Extra large (lg) */
     @media (width>=theme(--breakpoint-xl)) {
       @apply text-6xl;
     }
   }
-
+  h2 {
+    font-size: 30px;
+    /* Tablet (md) */
+    @media (width>=theme(--breakpoint-md)) {
+      @apply text-3xl;
+    }
+    /* Desktop (lg) */
+    @media (width>=theme(--breakpoint-lg)) {
+      @apply text-4xl;
+    }
+    /* Extra large (xl) */
+    @media (width>=theme(--breakpoint-xl)) {
+      @apply text-5xl;
+    }
+  }
   p {
     /* Default size (Mobile) */
     @apply text-base leading-relaxed text-gray-700;

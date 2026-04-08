@@ -2,7 +2,6 @@ import hero_left from "../assets/images/hero-left.png";
 import Navbar from "./Navbar";
 
 const Hero = ({ data }) => {
-  console.log("this is hero dat", data);
   const {
     subHeading,
     mainHeading,
