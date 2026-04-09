@@ -47,7 +47,7 @@ const Trusted = () => {
               return (
                 <div key={items.id}>
                   <img
-                    className="w-[70px h-[70px] aspect-video object-contain grayscale contrast-400"
+                    className="lg:w-[130px] lg:h-[70px]   aspect-video object-contain grayscale contrast-400 hover:filter-none transition duration-500 ease-in-out cursor-pointer"
                     src={items.logo}
                     alt=""
                   />

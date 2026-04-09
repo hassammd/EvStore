@@ -86,7 +86,7 @@ const Navbar = () => {
               </div>
               {/* mobile navigation */}
               <div
-                className={`${isActive ? "block" : "hidden"} w-1/2 lg:hidden absolute top-16 right-0 py-4  flex items-center justify-center bg-gray`}
+                className={`${isActive ? "block" : "hidden"} w-1/2 lg:hidden absolute z-10 top-16 right-0 py-4  flex items-center justify-center bg-gray`}
               >
                 <ul className=" flex flex-col items-center justify-center gap-7">
                   <li>

@@ -12,20 +12,26 @@ const Hero = ({ data }) => {
   } = data;
   return (
     <>
-      <div className="bg-gradient-to-r from-blue-50 to-cyan-50 pb-[70px] md:pb-[90px] lg:pb-[100px]">
+      <div className="bg-gradient-to-r from-blue-50 to-cyan-50 md:pb-[90px] lg:pb-[100px]">
         <Navbar />
         <div className="container mx-auto px-4 py-[100px]">
           <div className="flex flex-col-reverse md:flex-row justify-between gap-2 items-center">
-            <div className="w-1/2 flex flex-col gap-5 items-center md:items-start">
+            <div className="lg:w-1/2 md:w-1/2 w-full flex flex-col gap-5 items-center md:items-start">
               <span className="text-blue-500 text-lg">{subHeading}</span>
-              <h1 className="font-bold">{mainHeading}</h1>
+              <h1 className="font-bold md:text-left text-center">
+                {mainHeading}
+              </h1>
               <p className="text-center md:text-left">{description}</p>
-              <button className=" lg:block uppercase bg-orange text-white py-3 px-10 rounded-sm cursor-pointer">
+              <button className=" hover:-translate-y-1 transition duration-300 lg:block uppercase bg-orange text-white py-3 px-10 rounded-sm cursor-pointer">
                 Shop Now
               </button>
             </div>
-            <div className="w-1/2 flex text-center">
-              <img className=" w-full" src={image} alt="" />
+            <div className="lg:w-1/2 md:w-1/2  flex text-center">
+              <img
+                className="w-full animate-float  duration-300"
+                src={image}
+                alt=""
+              />
             </div>
           </div>
         </div>
