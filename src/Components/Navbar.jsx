@@ -2,7 +2,7 @@ import { GrCart } from "react-icons/gr";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseSharp } from "react-icons/io5";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
@@ -19,16 +19,44 @@ const Navbar = () => {
             <div className="hidden lg:block">
               <ul className="flex gap-10">
                 <li>
-                  <Link to="/">Home</Link>
+                  <NavLink
+                    className={(e) =>
+                      `${e.isActive ? "border-b-2 border-orange font-semibold transition text-orange duration-200 ease-in-out p-0.5" : ""} p-0.5 hover:text-orange hover:font-semibold transition duration-300 ease-in-out`
+                    }
+                    to="/"
+                  >
+                    Home
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to={"/about"}>About</Link>
+                  <NavLink
+                    className={(e) =>
+                      `${e.isActive ? "border-b-2 border-orange font-semibold transition text-orange duration-200 ease-in-out p-0.5" : ""} p-0.5 hover:text-orange hover:font-semibold transition duration-300 ease-in-out`
+                    }
+                    to={"/about"}
+                  >
+                    About
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to={"/products"}>Products</Link>
+                  <NavLink
+                    className={(e) =>
+                      `${e.isActive ? "border-b-2 border-orange font-semibold transition text-orange duration-200 ease-in-out p-0.5" : ""} p-0.5 hover:text-orange hover:font-semibold transition duration-300 ease-in-out`
+                    }
+                    to={"/products"}
+                  >
+                    Products
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to={"/contact"}>Contacts</Link>
+                  <NavLink
+                    className={(e) =>
+                      `${e.isActive ? "border-b-2 border-orange font-semibold transition text-orange duration-200 p-0.5 ease-in-out" : ""} p-0.5 hover:text-orange hover:font-semibold transition duration-300 ease-in-out`
+                    }
+                    to={"/contact"}
+                  >
+                    Contacts
+                  </NavLink>
                 </li>
               </ul>
             </div>
