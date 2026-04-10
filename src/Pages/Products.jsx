@@ -6,13 +6,22 @@ import { heroData } from "../heroData";
 import { useEffect, useState } from "react";
 import { fetchproducts } from "../Redux/ProductSlice/ProductSlice";
 import { fetchCategory } from "../Redux/CategorySlice/CategorySlice";
+import { HiViewGrid } from "react-icons/hi";
+import { MdViewList } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Products = () => {
   const [searchedProduct, setSearchedProduct] = useState("");
-  const [currentPage, setCurrentPage] = useState();
+  const [isGridView, setIsGridView] = useState(true);
+  const [sortOrder, setSortOrder] = useState("az");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [maxPriceRange, setMaxPriceRange] = useState(20000);
+  const [isActiveFilterBar, setIsActiveFilterBar] = useState(false);
   const { products, loading } = useSelector((state) => state.products);
   const { category } = useSelector((state) => state.categories);
+  console.log(isActiveFilterBar);
+
+  console.log("this is price", maxPriceRange);
   const data = useSelector((state) => state);
   console.log("this is All products list", products);
 
@@ -28,10 +37,21 @@ const Products = () => {
     const matchCategory =
       selectedCategory == "" ||
       items.category.toLowerCase() == selectedCategory.toLowerCase();
+    const priceRange = items.price <= maxPriceRange;
 
-    return matchSearch && matchCategory;
+    return matchSearch && matchCategory && priceRange;
   });
-  console.log("this is items from fitler", filteredProducts);
+
+  //sorting
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (sortOrder == "az") {
+      return a.title.localeCompare(b.title);
+    } else if (sortOrder == "za") {
+      return b.title.localeCompare(a.title);
+    }
+    return 0;
+  });
 
   useEffect(() => {
     dispatch(fetchproducts());
@@ -47,9 +67,19 @@ const Products = () => {
           <h2 className="text-xl md:text-3xl text-center lg:mb-20 md:mb-15 sm:mb-15 mb-10 text-gray-900 tracking-tight">
             Explore Categories
           </h2>
-          <p>{selectedCategory}</p>
-          <div className="flex gap-7">
-            <div className=" h-screen sticky top-0 flex flex-col gap-8 bg-gray lg:w-[20%] p-10">
+
+          <div className="flex  gap-7">
+            <div
+              onClick={() => setIsActiveFilterBar(false)}
+              className={`fixed inset-0 bg-black/50 z-10 ${
+                isActiveFilterBar ? "block" : "hidden"
+              }`}
+            ></div>
+            {/* filter bar */}
+
+            <div
+              className={`${isActiveFilterBar ? " left-0 " : " -left-full"}  lg:left-0 z-10 transition-all duration-300  fixed w-[90%] top-0 h-screen  lg:relative  flex flex-col gap-8 bg-gray lg:w-[20%] lg:p-10 p-5`}
+            >
               <p className="mb-4 text-center">Filter</p>
               <div>
                 <label className="input">
@@ -75,11 +105,17 @@ const Products = () => {
               <div>
                 <p className="mb-4">Category</p>
                 <ul className="flex flex-col gap-2">
+                  <li
+                    className={`cursor-pointer ${selectedCategory == "" ? "text-orange font-semibold" : ""}`}
+                    onClick={() => setSelectedCategory("")}
+                  >
+                    All
+                  </li>
                   {category
                     ? category.map((items) => {
                         return (
                           <li
-                            className="text-sm"
+                            className={`text-sm ${selectedCategory == items.name ? "text-orange font-semibold" : ""} cursor-pointer`}
                             onClick={() => setSelectedCategory(items.name)}
                           >
                             {items.name}
@@ -89,32 +125,90 @@ const Products = () => {
                     : ""}
                 </ul>
               </div>
+              <div className="flex gap-3">
+                <input
+                  onChange={(e) => setMaxPriceRange(e.target.value)}
+                  type="range"
+                  max={10000}
+                  value={maxPriceRange}
+                  className="range text-blue-300 [--range-bg:orange] [--range-thumb:blue] [--range-fill:0]"
+                />
+                <span>${maxPriceRange}</span>
+              </div>
             </div>
-            <div className="lg:w-[70%] flex justify-center flex-wrap gap-[30px]">
-              {loading ? (
-                [...Array(9)].map((items) => {
-                  return <Shimmer />;
-                })
-              ) : filteredProducts.length > 0 ? (
-                filteredProducts.map((products, index) => {
-                  return (
-                    <>
-                      <div className="flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%] lg:w-1/4 lg:p-8 cursor-pointer hover:shadow-md">
-                        <img
-                          src={products.thumbnail}
-                          alt=""
-                          className="object-contain w-20 h-20 lg:w-24 lg:h-24"
-                        />
-                        <p className="font-medium text-center text-gray-800 text-sm md:text-base">
-                          {products.title}
-                        </p>
-                      </div>
-                    </>
-                  );
-                })
-              ) : (
-                <p>No products found for {searchedProduct}</p>
-              )}
+            {/* products */}
+            <div className="lg:w-[70%] flex justify-start flex-col flex-wrap gap-[30px]">
+              <div>
+                <div className="flex justify-between">
+                  {/* hamburger icons */}
+                  <span
+                    onClick={() => setIsActiveFilterBar(true)}
+                    className="lg:hidden flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                  >
+                    <GiHamburgerMenu />
+                  </span>
+                  {/* hamburger icons */}
+                  <div className="flex gap-3.5 justify-between">
+                    <span
+                      onClick={() => setIsGridView(true)}
+                      className="flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                    >
+                      <HiViewGrid className="lg:text-2xl cursor-pointer" />
+                    </span>
+                    <span
+                      onClick={() => setIsGridView(false)}
+                      className="flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                    >
+                      <MdViewList className="lg:text-3xl cursor-pointer" />
+                    </span>
+                  </div>
+                  <div className=" dropdown">
+                    <select
+                      className=" border border-gray-200 bg-gray-50 lg:px-5 lg:py-3"
+                      name=""
+                      value={sortOrder}
+                      id=""
+                      onChange={(e) => setSortOrder(e.target.value)}
+                    >
+                      <option className="" value="az">
+                        A to Z
+                      </option>
+                      <option value="za">Z to A</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div
+                className={`${isGridView ? "lg:w-full flex justify-between flex-wrap gap-[30px]" : "flex flex-col gap-7"}`}
+              >
+                {loading ? (
+                  [...Array(9)].map((items) => {
+                    return <Shimmer />;
+                  })
+                ) : sortedProducts.length > 0 ? (
+                  sortedProducts.map((products, index) => {
+                    return (
+                      <>
+                        <div
+                          className={`flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%] ${isGridView ? "lg:w-1/4" : "lg:w-full"}  lg:p-8 cursor-pointer hover:shadow-md`}
+                        >
+                          <img
+                            src={products.thumbnail}
+                            alt=""
+                            className="object-contain w-20 h-20 lg:w-24 lg:h-24"
+                          />
+                          <p className="font-medium text-center text-gray-800 text-sm md:text-base">
+                            {products.title}
+                          </p>
+                          <p className="text-orange">${products.price}</p>
+                        </div>
+                      </>
+                    );
+                  })
+                ) : (
+                  <p>No products found for {searchedProduct}</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
