@@ -50,4 +50,13 @@ export const heroData = {
     secondaryBtn: "Back to Shop",
     image: cartImage,
   },
+  productsByCategory: {
+    subHeading: "Your Selections",
+    mainHeading: "Ready to Checkout?",
+    description:
+      "Review your items and apply any available coupons for extra discounts.",
+    primaryBtn: "Checkout Now",
+    secondaryBtn: "Back to Shop",
+    image: cartImage,
+  },
 };

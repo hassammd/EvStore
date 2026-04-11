@@ -14,7 +14,7 @@ export const fetchCategory = createAsyncThunk(
   async (payload, { fulfillWithValue }) => {
     try {
       const response = await axios.get(
-        "https://dummyjson.com/products/categories",
+        "https://dummyjson.com/products/categories?limit=6",
       );
       const categoryList = response.data;
 

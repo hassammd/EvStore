@@ -15,7 +15,7 @@ const Products = () => {
   const [isGridView, setIsGridView] = useState(true);
   const [sortOrder, setSortOrder] = useState("az");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [maxPriceRange, setMaxPriceRange] = useState(20000);
+  const [maxPriceRange, setMaxPriceRange] = useState(2000);
   const [isActiveFilterBar, setIsActiveFilterBar] = useState(false);
   const { products, loading } = useSelector((state) => state.products);
   const { category } = useSelector((state) => state.categories);
@@ -42,15 +42,16 @@ const Products = () => {
     return matchSearch && matchCategory && priceRange;
   });
 
-  //sorting
+  //product sorting
 
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const productSort = [...filteredProducts].sort((a, b) => {
     if (sortOrder == "az") {
-      return a.title.localeCompare(b.title);
+      return a.price - b.price;
     } else if (sortOrder == "za") {
-      return b.title.localeCompare(a.title);
+      return b.price - a.price;
+    } else {
+      0;
     }
-    return 0;
   });
 
   useEffect(() => {
@@ -129,7 +130,7 @@ const Products = () => {
                 <input
                   onChange={(e) => setMaxPriceRange(e.target.value)}
                   type="range"
-                  max={10000}
+                  max={2000}
                   value={maxPriceRange}
                   className="range text-blue-300 [--range-bg:orange] [--range-thumb:blue] [--range-fill:0]"
                 />
@@ -185,8 +186,8 @@ const Products = () => {
                   [...Array(9)].map((items) => {
                     return <Shimmer />;
                   })
-                ) : sortedProducts.length > 0 ? (
-                  sortedProducts.map((products, index) => {
+                ) : productSort.length > 0 ? (
+                  productSort.map((products, index) => {
                     return (
                       <>
                         <div

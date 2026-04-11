@@ -1,7 +1,13 @@
+import { Link, useNavigate } from "react-router-dom";
+
 const ProductsCard = ({ data }) => {
+  const navigate = useNavigate();
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%] lg:w-1/4 lg:p-8 cursor-pointer hover:shadow-md">
+      <div
+        onClick={() => navigate(`/category/${data.slug}`)}
+        className="flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%] lg:w-1/4 lg:p-8 cursor-pointer hover:shadow-md"
+      >
         <img
           src={data.image}
           alt=""

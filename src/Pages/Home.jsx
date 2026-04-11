@@ -12,7 +12,7 @@ import ProductsCard from "../Components/ProductsCard";
 const Home = () => {
   const dispatch = useDispatch();
   const { category, loading } = useSelector((state) => state.categories);
-  console.log("this is data", category);
+
   useEffect(() => {
     dispatch(fetchCategory());
   }, []);
