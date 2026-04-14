@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
+
 const Footer = () => {
+  const { isDark } = useSelector((state) => state.theme);
   return (
     <>
-      <div className="bg-gray">
+      <div className={`${isDark ? "bg-base-200" : "bg-gray"} `}>
         <footer className="footer container mx-auto sm:footer-horizontal bg-base-200 text-base-content p-10">
           <aside>
             <svg

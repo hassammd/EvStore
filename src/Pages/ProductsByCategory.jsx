@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { addToCart } from "../Redux/CartSlice/CartSlice";
 const ProductsByCategory = () => {
   const dispatch = useDispatch();
+  const { isDark } = useSelector((state) => state.theme);
   const { products } = useSelector((state) => state.productsByCat);
   const [isGridView, setIsGridView] = useState(true);
   const [priceRange, setPriceRange] = useState(200);
@@ -48,7 +49,9 @@ const ProductsByCategory = () => {
       <Hero data={heroData.products} />
       <div className="lg:py-[100px] md:py-[90px] sm:py-[70px] py-[50px] ">
         <div className="container mx-auto px-4">
-          <h2 class="capitalize  text-xl md:text-3xl text-center lg:mb-20 md:mb-15 sm:mb-15 mb-10 text-gray-900 tracking-tight">
+          <h2
+            class={`capitalize  text-xl md:text-3xl text-center lg:mb-20 md:mb-15 sm:mb-15 mb-10 ${isDark ? "text-base" : "text-gray-900"}  tracking-tight`}
+          >
             Explore {productName} Products
           </h2>
           {/* left side */}
@@ -60,7 +63,7 @@ const ProductsByCategory = () => {
               className={`${isActiveFilterBar ? "fixed inset-0 bg-black/50 z-10 block lg:hidden" : "hidden "}  `}
             ></div>
             <div
-              className={` ${isActiveFilterBar ? "block" : "hidden"}  transition-all duration-300 ease-in-out lg:relative fixed top-0 w-[90%] h-screen z-10 left-0 lg:block bg-gray lg:w-[20%] lg:p-10 p-5`}
+              className={` ${isActiveFilterBar ? "block" : "hidden"} rounded-sm  transition-all duration-300 ease-in-out lg:relative fixed top-0 w-[90%] h-screen z-10 left-0 lg:block ${isDark ? "bg-base-200" : "bg-gray"}   lg:w-[20%] lg:p-10 p-5`}
             >
               <p>Filter</p>
               <div className="flex flex-col gap-15">
@@ -92,7 +95,7 @@ const ProductsByCategory = () => {
                 {/* search products */}
                 {/* Price Range */}
                 <div>
-                  <p>Price</p>
+                  <p className={`${isDark ? "text-gray" : " "} `}>Price</p>
                   <div className="flex items-center gap-3">
                     <input
                       onChange={(e) => setPriceRange(e.target.value)}
@@ -102,7 +105,9 @@ const ProductsByCategory = () => {
                       value={priceRange}
                       className="range text-blue-300 [--range-bg:orange] [--range-thumb:blue] [--range-fill:0] "
                     />
-                    <p>${priceRange}</p>
+                    <p className={`${isDark ? "text-gray" : " "} `}>
+                      ${priceRange}
+                    </p>
                   </div>
                 </div>
                 {/* Price Range */}
@@ -116,7 +121,7 @@ const ProductsByCategory = () => {
                 <div class="flex gap-3.5 justify-between">
                   <span
                     onClick={() => setIsActiveFilterBar(true)}
-                    class="lg:hidden flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                    class={`"lg:hidden flex items-center justify-center text-center  border  ${isDark ? "bg-base-200 border-base-300" : "bg-gray-50 border-gray-200"}    w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
                   >
                     <svg
                       stroke="currentColor"
@@ -132,7 +137,7 @@ const ProductsByCategory = () => {
                   </span>
                   <span
                     onClick={() => setIsGridView(true)}
-                    class="flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                    className={`flex items-center justify-center text-center  border  ${isDark ? "bg-base-200 border-base-300" : "bg-gray-50 border-gray-200"}  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
                   >
                     <svg
                       stroke="currentColor"
@@ -150,7 +155,7 @@ const ProductsByCategory = () => {
                   </span>
                   <span
                     onClick={() => setIsGridView(false)}
-                    class="flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                    class={`flex items-center justify-center text-center rounded-sm border  ${isDark ? "bg-base-200 border-base-300" : "bg-gray-50 border-gray-200"}  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"`}
                   >
                     <svg
                       stroke="currentColor"
@@ -171,7 +176,7 @@ const ProductsByCategory = () => {
                 <div class=" dropdown">
                   <select
                     onChange={(e) => setProductSort(e.target.value)}
-                    class=" border border-gray-200 bg-gray-50 lg:px-5 lg:py-3"
+                    class={` border  ${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"} lg:px-5 lg:py-3`}
                     name=""
                     id=""
                   >
@@ -187,22 +192,27 @@ const ProductsByCategory = () => {
                   return (
                     <>
                       <div
-                        className={` flex ${isGridView ? "lg:w-[23%] " : "lg:w-full"} group relative flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%]  lg:p-8 cursor-pointer hover:shadow-md`}
+                        className={` flex ${isGridView ? "lg:w-[23%] " : "lg:w-full"} group relative flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border  rounded-lg ${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"}  w-full sm:w-[45%] md:w-[30%]  lg:p-8 cursor-pointer hover:shadow-md`}
                       >
-                        <div className="flex items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
+                        <div className="flex flex-col items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
                           <span
                             onClick={() => dispatch(addToCart(items))}
-                            className=" flex items-center justify-center rounded-full h-[70px] w-[70px] border border-2 border-white"
+                            className=" flex items-center justify-center h-[70px] w-[70px] border-white"
                           >
                             <FiShoppingCart className="text-3xl text-white" />
                           </span>
+                          <p className="text-gray text-lg">Add to cart</p>
                         </div>
                         <img
                           className="object-contain w-20 h-20 lg:w-24 lg:h-24"
                           src={items.thumbnail}
                           alt=""
                         />
-                        <p className="text-center">{items.title}</p>
+                        <p
+                          className={`${isDark ? "text-gray" : " "} text-center`}
+                        >
+                          {items.title}
+                        </p>
                         <p className="text-center text-orange">
                           ${items.price}
                         </p>

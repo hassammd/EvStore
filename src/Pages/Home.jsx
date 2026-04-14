@@ -11,6 +11,7 @@ import ProductsCard from "../Components/ProductsCard";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { isDark } = useSelector((state) => state.theme);
   const { category, loading } = useSelector((state) => state.categories);
 
   useEffect(() => {
@@ -21,7 +22,9 @@ const Home = () => {
       <Hero data={heroData.home} />
       <div className="lg:py-[100px] md:py-[90px] sm:py-[70px] py-[50px] ">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl md:text-3xl text-center lg:mb-20 md:mb-15 sm:mb-15 mb-10 text-gray-900 tracking-tight">
+          <h2
+            className={`text-xl md:text-3xl text-center lg:mb-20 md:mb-15 sm:mb-15 mb-10 ${isDark ? "text-gray" : "text-gray-900"}  tracking-tight`}
+          >
             Explore Categories
           </h2>
 

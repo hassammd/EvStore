@@ -9,6 +9,8 @@ import { fetchCategory } from "../Redux/CategorySlice/CategorySlice";
 import { HiViewGrid } from "react-icons/hi";
 import { MdViewList } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { addToCart } from "../Redux/CartSlice/CartSlice";
+import { FiShoppingCart } from "react-icons/fi";
 
 const Products = () => {
   const [searchedProduct, setSearchedProduct] = useState("");
@@ -19,11 +21,9 @@ const Products = () => {
   const [isActiveFilterBar, setIsActiveFilterBar] = useState(false);
   const { products, loading } = useSelector((state) => state.products);
   const { category } = useSelector((state) => state.categories);
-  console.log(isActiveFilterBar);
 
-  console.log("this is price", maxPriceRange);
   const data = useSelector((state) => state);
-  console.log("this is All products list", products);
+  const { isDark } = useSelector((state) => state.theme);
 
   console.log("this is category", data);
 
@@ -65,7 +65,7 @@ const Products = () => {
       <Hero data={heroData.products} />
       <div className="lg:py-[100px] md:py-[90px] sm:py-[70px] py-[50px] ">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl md:text-3xl text-center lg:mb-20 md:mb-15 sm:mb-15 mb-10 text-gray-900 tracking-tight">
+          <h2 className="text-xl md:text-3xl text-center lg:mb-20 md:mb-15 sm:mb-15 mb-10   tracking-tight">
             Explore Categories
           </h2>
 
@@ -79,9 +79,11 @@ const Products = () => {
             {/* filter bar */}
 
             <div
-              className={`${isActiveFilterBar ? " left-0 " : " -left-full"}  lg:left-0 z-10 transition-all duration-300  fixed w-[90%] top-0 h-screen  lg:relative  flex flex-col gap-8 bg-gray lg:w-[20%] lg:p-10 p-5`}
+              className={`${isActiveFilterBar ? " left-0 " : " -left-full"} rounded-sm  lg:left-0 z-10 transition-all duration-300  fixed w-[90%] top-0 h-screen  lg:relative  flex flex-col gap-8 ${isDark ? "bg-base-200" : "bg-gray"}  lg:w-[20%] lg:p-10 p-5 `}
             >
-              <p className="mb-4 text-center">Filter</p>
+              <p className={`mb-4 text-center ${isDark ? "text-gray" : ""}`}>
+                Filter
+              </p>
               <div>
                 <label className="input">
                   <svg
@@ -99,12 +101,14 @@ const Products = () => {
                     type="search"
                     required
                     placeholder="Search"
-                    className="outline-none"
+                    className="outline-none  "
                   />
                 </label>
               </div>
               <div>
-                <p className="mb-4">Category</p>
+                <p className={`mb-4  ${isDark ? "text-gray" : ""} `}>
+                  Category
+                </p>
                 <ul className="flex flex-col gap-2">
                   <li
                     className={`cursor-pointer ${selectedCategory == "" ? "text-orange font-semibold" : ""}`}
@@ -144,28 +148,28 @@ const Products = () => {
                   {/* hamburger icons */}
                   <span
                     onClick={() => setIsActiveFilterBar(true)}
-                    className="lg:hidden flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                    className={`lg:hidden flex items-center justify-center text-center  border border-gray-200 ${isDark ? "bg-base-200" : "bg-gray-50"}  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
                   >
                     <GiHamburgerMenu />
                   </span>
                   {/* hamburger icons */}
-                  <div className="flex gap-3.5 justify-between">
+                  <div className="flex gap-3.5 justify-between ">
                     <span
                       onClick={() => setIsGridView(true)}
-                      className="flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                      className={`flex items-center justify-center text-center  border border-gray-200 ${isDark ? "bg-base-200" : "bg-gray-50"}   w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
                     >
                       <HiViewGrid className="lg:text-2xl cursor-pointer" />
                     </span>
                     <span
                       onClick={() => setIsGridView(false)}
-                      className="flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                      className={`flex items-center justify-center text-center  border border-gray-200 ${isDark ? "bg-base-200" : "bg-gray-50"}  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
                     >
                       <MdViewList className="lg:text-3xl cursor-pointer" />
                     </span>
                   </div>
                   <div className=" dropdown">
                     <select
-                      className=" border border-gray-200 bg-gray-50 lg:px-5 lg:py-3"
+                      className={` border rounded-sm border-gray-200 ${isDark ? "bg-base-200" : "bg-gray-50"} lg:px-5 lg:py-3`}
                       name=""
                       value={sortOrder}
                       id=""
@@ -191,14 +195,26 @@ const Products = () => {
                     return (
                       <>
                         <div
-                          className={`flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%] ${isGridView ? "lg:w-[23%]" : "lg:w-full"}  lg:p-8 cursor-pointer hover:shadow-md`}
+                          onClick={() => dispatch(addToCart(products))}
+                          className={`group relative flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border  ${isDark ? "border-base-200" : "border-gray-200"}  rounded-lg ${isDark ? "bg-base-200" : "bg-gray-50"} w-full sm:w-[45%] md:w-[30%] ${isGridView ? "lg:w-[23%]" : "lg:w-full"}  lg:p-8 cursor-pointer hover:shadow-md`}
                         >
+                          <div className="flex flex-col items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
+                            <span
+                              onClick={() => dispatch(addToCart(items))}
+                              className=" flex items-center justify-center h-[70px] w-[70px] border-white"
+                            >
+                              <FiShoppingCart className="text-3xl text-white" />
+                            </span>
+                            <p className="text-gray text-lg">Add to cart</p>
+                          </div>
                           <img
                             src={products.thumbnail}
                             alt=""
                             className="object-contain w-20 h-20 lg:w-24 lg:h-24"
                           />
-                          <p className="font-medium text-center text-gray-800 text-sm md:text-base">
+                          <p
+                            className={`font-medium text-center ${isDark ? " text-gray" : "text-gray-800"}  text-sm md:text-base`}
+                          >
                             {products.title}
                           </p>
                           <p className="text-orange">${products.price}</p>

@@ -15,15 +15,17 @@ function App() {
   return (
     <>
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/products" element={<Products />} />
-
-        <Route path="/thankyou" element={<ThankYou />} />
-        <Route path="*" element={<ErrorPage />} />
-        <Route path="/category/:productName" element={<ProductsByCategory />} />
         <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/thankyou" element={<ThankYou />} />
+          <Route path="*" element={<ErrorPage />} />
+          <Route
+            path="/category/:productName"
+            element={<ProductsByCategory />}
+          />
           <Route path="/cart" element={<Cart />} />
         </Route>
       </Routes>
