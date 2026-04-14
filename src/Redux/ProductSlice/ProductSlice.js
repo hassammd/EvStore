@@ -15,7 +15,7 @@ const fetchproducts = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "https://dummyjson.com/products?limit=0 ",
+        "https://dummyjson.com/products?limit=0",
       );
       console.log("this is response", response);
       return response.data.products;

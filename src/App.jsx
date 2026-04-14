@@ -19,11 +19,13 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/cart" element={<Cart />} />
+
         <Route path="/thankyou" element={<ThankYou />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/category/:productName" element={<ProductsByCategory />} />
-        <Route path="/" element={<Layout />}></Route>
+        <Route path="/" element={<Layout />}>
+          <Route path="/cart" element={<Cart />} />
+        </Route>
       </Routes>
     </>
   );

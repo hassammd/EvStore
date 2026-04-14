@@ -1,15 +1,18 @@
 import { heroData } from "../heroData";
+import { FiShoppingCart } from "react-icons/fi";
 import Hero from "../Components/Hero";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByCat } from "../Redux/ProductByCatSlice/ProductsByCatSlice";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../Redux/CartSlice/CartSlice";
 const ProductsByCategory = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.productsByCat);
   const [isGridView, setIsGridView] = useState(true);
   const [priceRange, setPriceRange] = useState(200);
   const [productSort, setProductSort] = useState("az");
+  const [isActiveFilterBar, setIsActiveFilterBar] = useState(false);
   const [searchedProducts, setSearchedProducts] = useState("");
   const { productName } = useParams();
 
@@ -37,8 +40,6 @@ const ProductsByCategory = () => {
     } else {
       return 0;
     }
-    console.log("this is a", a);
-    console.log("this is a", b);
   });
 
   console.log("sortProducts");
@@ -51,8 +52,16 @@ const ProductsByCategory = () => {
             Explore {productName} Products
           </h2>
           {/* left side */}
-          <div className="flex gap-7 justify-between">
-            <div className="bg-gray lg:w-[20%] lg:p-10 p-5">
+          <div className={` flex gap-7 justify-between`}>
+            <div
+              onClick={() => {
+                setIsActiveFilterBar(false);
+              }}
+              className={`${isActiveFilterBar ? "fixed inset-0 bg-black/50 z-10 block lg:hidden" : "hidden "}  `}
+            ></div>
+            <div
+              className={` ${isActiveFilterBar ? "block" : "hidden"}  transition-all duration-300 ease-in-out lg:relative fixed top-0 w-[90%] h-screen z-10 left-0 lg:block bg-gray lg:w-[20%] lg:p-10 p-5`}
+            >
               <p>Filter</p>
               <div className="flex flex-col gap-15">
                 {/* Search products */}
@@ -105,6 +114,22 @@ const ProductsByCategory = () => {
               <div className="flex justify-between">
                 {/* grid view */}
                 <div class="flex gap-3.5 justify-between">
+                  <span
+                    onClick={() => setIsActiveFilterBar(true)}
+                    class="lg:hidden flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
+                  >
+                    <svg
+                      stroke="currentColor"
+                      fill="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 512 512"
+                      height="1em"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"></path>
+                    </svg>
+                  </span>
                   <span
                     onClick={() => setIsGridView(true)}
                     class="flex items-center justify-center text-center  border border-gray-200 bg-gray-50  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm"
@@ -162,8 +187,16 @@ const ProductsByCategory = () => {
                   return (
                     <>
                       <div
-                        className={`flex ${isGridView ? "lg:w-[23%] " : "lg:w-full"} flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%]  lg:p-8 cursor-pointer hover:shadow-md`}
+                        className={` flex ${isGridView ? "lg:w-[23%] " : "lg:w-full"} group relative flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%]  lg:p-8 cursor-pointer hover:shadow-md`}
                       >
+                        <div className="flex items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
+                          <span
+                            onClick={() => dispatch(addToCart(items))}
+                            className=" flex items-center justify-center rounded-full h-[70px] w-[70px] border border-2 border-white"
+                          >
+                            <FiShoppingCart className="text-3xl text-white" />
+                          </span>
+                        </div>
                         <img
                           className="object-contain w-20 h-20 lg:w-24 lg:h-24"
                           src={items.thumbnail}

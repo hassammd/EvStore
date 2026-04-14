@@ -3,13 +3,21 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseSharp } from "react-icons/io5";
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
+
+  const quantityCount = cart.reduce((acc, current) => {
+    return current.quantity + acc;
+  }, 0);
+  console.log("this is from nav", quantityCount);
+
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full ">
+      <div className="w-full fixed top-0 z-30 bg-white ">
         <div className="container mx-auto px-4">
           <nav className="flex justify-between items-center py-5">
             <div>
@@ -71,7 +79,7 @@ const Navbar = () => {
               >
                 <GrCart className="text-2xl" />
                 <span className="absolute top-[-10px] right-[-17px] text-white flex items-center justify-center bg-orange rounded-2xl h-6 w-6">
-                  0
+                  {quantityCount}
                 </span>
               </div>
               <div className="lg:hidden flex flex-row  ">

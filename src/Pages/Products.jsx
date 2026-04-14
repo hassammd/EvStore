@@ -180,7 +180,7 @@ const Products = () => {
                 </div>
               </div>
               <div
-                className={`${isGridView ? "lg:w-full flex justify-between flex-wrap gap-[30px]" : "flex flex-col gap-7"}`}
+                className={`${isGridView ? "w-full flex  flex-wrap gap-7" : "flex flex-col gap-7"}`}
               >
                 {loading ? (
                   [...Array(9)].map((items) => {
@@ -191,7 +191,7 @@ const Products = () => {
                     return (
                       <>
                         <div
-                          className={`flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%] ${isGridView ? "lg:w-1/4" : "lg:w-full"}  lg:p-8 cursor-pointer hover:shadow-md`}
+                          className={`flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border border-gray-200 rounded-lg bg-gray-50 w-full sm:w-[45%] md:w-[30%] ${isGridView ? "lg:w-[23%]" : "lg:w-full"}  lg:p-8 cursor-pointer hover:shadow-md`}
                         >
                           <img
                             src={products.thumbnail}
