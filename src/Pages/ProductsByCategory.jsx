@@ -43,7 +43,6 @@ const ProductsByCategory = () => {
     }
   });
 
-  console.log("sortProducts");
   return (
     <>
       <Hero data={heroData.products} />
@@ -65,7 +64,22 @@ const ProductsByCategory = () => {
             ></div>
             {/* left side */}
             <div
-              className={` ${isActiveFilterBar ? "fixed top-0 " : "hidden"}  rounded-sm  transition-all duration-300 ease-in-out lg:sticky lg:block lg:top-[80px]   w-[90%] h-screen z-10 left-0  ${isDark ? "bg-base-200" : "bg-gray"}   lg:w-[20%] lg:p-10 p-5`}
+              className={`
+  /* Mobile: Fixed Drawer Logic */
+  fixed top-0 z-30 h-screen w-[85%] 
+  transition-all duration-300 ease-in-out
+  
+  /* Animation Logic   */
+  ${isActiveFilterBar ? "left-0 opacity-100" : "-left-full lg:left-0 opacity-0 lg:opacity-100"} 
+
+  /* Desktop: Sticky Sidebar Logic */
+  lg:sticky lg:top-[80px] lg:block lg:w-[20%] lg:h-[calc(100vh-80px)]
+  
+  /* Styling & Scroll */
+  overflow-y-auto shadow-xl lg:shadow-none
+  ${isDark ? "bg-base-200 text-white" : "bg-gray-100 text-black"} 
+  lg:p-10 p-5 rounded-sm
+`}
             >
               <p>Filter</p>
               <div className="flex flex-col gap-15">
@@ -123,7 +137,7 @@ const ProductsByCategory = () => {
                 <div class="flex gap-3.5 justify-between">
                   <span
                     onClick={() => setIsActiveFilterBar(true)}
-                    class={`"lg:hidden flex items-center justify-center text-center  border  ${isDark ? "bg-base-200 border-base-300" : "bg-gray-50 border-gray-200"}    w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
+                    class={`lg:hidden flex items-center justify-center text-center  border  ${isDark ? "bg-base-200 border-base-300" : "bg-gray-50 border-gray-200"}    w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
                   >
                     <svg
                       stroke="currentColor"
