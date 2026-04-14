@@ -11,6 +11,7 @@ import { PiShoppingCartSimpleBold } from "react-icons/pi";
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isDark } = useSelector((state) => state.theme);
 
   useEffect(() => {
     const scrollHanler = () => {
@@ -103,14 +104,14 @@ const Navbar = () => {
                 />
                 <IoCloseSharp
                   onClick={() => setIsActive(false)}
-                  className={`${isActive ? "block" : "hidden"} text-3xl`}
+                  className={`${isActive ? "block" : "hidden"} lg:text-3xl text-2xl`}
                 />
               </div>
               {/* mobile navigation */}
               <div
-                className={`${isActive ? "block" : "hidden"} w-1/2 lg:hidden absolute z-10 top-16 right-0 py-4  flex items-center justify-center bg-gray`}
+                className={`${isActive ? "left-0 opacity-100" : "-left-full opacity-0"} lg:hidden fixed transition-all duration-500 ease-in-out z-10 w-[70%] top-0 h-screen   py-4  flex items-center justify-center ${isDark ? "bg-base-200" : "bg-gray"} `}
               >
-                <ul className=" flex flex-col items-center justify-center gap-7">
+                <ul className=" flex flex-col items-center justify-center gap-6">
                   <li>
                     <Link to="/" onClick={() => setIsActive(false)}>
                       Home
