@@ -31,7 +31,7 @@ const Hero = ({ data }) => {
         className={`${isDark ? "bg-base-300" : "bg-gradient-to-r from-blue-50 to-cyan-50"}  md:pb-[90px] lg:pb-[100px]`}
       >
         <Navbar />
-        <div className="container mx-auto px-4 py-[100px]">
+        <div className="container mx-auto px-4 lg:py-[100px] py-[180px]">
           <div className="flex flex-col-reverse md:flex-row justify-between gap-2 items-center">
             <div className="lg:w-1/2 md:w-1/2 w-full flex flex-col gap-5 items-center md:items-start">
               <span className="text-blue-500 text-lg">{subHeading}</span>

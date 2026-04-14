@@ -121,7 +121,10 @@ const Products = () => {
                         return (
                           <li
                             className={`text-sm ${selectedCategory == items.name ? "text-orange font-semibold" : ""} cursor-pointer`}
-                            onClick={() => setSelectedCategory(items.name)}
+                            onClick={() => {
+                              (setIsActiveFilterBar(false),
+                                setSelectedCategory(items.name));
+                            }}
                           >
                             {items.name}
                           </li>
@@ -142,18 +145,18 @@ const Products = () => {
               </div>
             </div>
             {/* products */}
-            <div className="lg:w-[70%] flex justify-start flex-col flex-wrap gap-[30px]">
+            <div className="lg:w-full flex justify-start flex-col flex-wrap gap-[30px]">
               <div>
-                <div className="flex justify-between">
-                  {/* hamburger icons */}
-                  <span
-                    onClick={() => setIsActiveFilterBar(true)}
-                    className={`lg:hidden flex items-center justify-center text-center  border border-gray-200 ${isDark ? "bg-base-200" : "bg-gray-50"}  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
-                  >
-                    <GiHamburgerMenu />
-                  </span>
+                <div className="flex justify-between w-full">
                   {/* hamburger icons */}
                   <div className="flex gap-3.5 justify-between ">
+                    {/* hamburger icons */}
+                    <span
+                      onClick={() => setIsActiveFilterBar(true)}
+                      className={`lg:hidden flex items-center justify-center text-center  border border-gray-200 ${isDark ? "bg-base-200" : "bg-gray-50"}  w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
+                    >
+                      <GiHamburgerMenu />
+                    </span>
                     <span
                       onClick={() => setIsGridView(true)}
                       className={`flex items-center justify-center text-center  border border-gray-200 ${isDark ? "bg-base-200" : "bg-gray-50"}   w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] rounded-sm`}
