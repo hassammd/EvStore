@@ -79,7 +79,7 @@ const Products = () => {
             {/* filter bar */}
 
             <div
-              className={`${isActiveFilterBar ? " left-0 " : " -left-full"} rounded-sm  lg:left-0 z-10 transition-all duration-300  fixed w-[90%] top-0 h-screen  lg:relative  flex flex-col gap-8 ${isDark ? "bg-base-200" : "bg-gray"}  lg:w-[20%] lg:p-10 p-5 `}
+              className={`${isActiveFilterBar ? " left-0 " : " -left-full"} rounded-sm  lg:left-0 z-30 transition-all duration-300 fixed w-[90%]  h-full  lg:sticky top-0  g:h-[calc(100vh-80px)] overflow-auto flex flex-col gap-8 ${isDark ? "bg-base-200" : "bg-gray"}  lg:w-[20%] lg:p-10 p-5 `}
             >
               <p className={`mb-4 text-center ${isDark ? "text-gray" : ""}`}>
                 Filter

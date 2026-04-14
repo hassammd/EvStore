@@ -6,18 +6,18 @@ const Theme = () => {
 
   return (
     <>
-      <label className="swap swap-rotate">
+      <label className="swap swap-rotate hover:text-orange transition-all ease-in-out duration-200">
         {/* this hidden checkbox controls the state */}
         <input
           onChange={() => dispatch(toggleTheme())}
           type="checkbox"
-          className="theme-controller"
+          className="theme-controller "
           value="synthwave"
         />
 
         {/* sun icon */}
         <svg
-          className=" swap-off h-8 w-8 fill-current"
+          className=" swap-off lg:h-8 lg:w-8 h-7 w-7 fill-current  "
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
@@ -26,7 +26,7 @@ const Theme = () => {
 
         {/* moon icon */}
         <svg
-          className="swap-on h-8 w-8 fill-current"
+          className="swap-on lg:h-8 lg:w-8 h-7 w-7  fill-current "
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >

@@ -8,6 +8,7 @@ import {
   removeItem,
 } from "../Redux/CartSlice/CartSlice";
 import { useState } from "react";
+import Navbar from "../Components/Navbar";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -18,7 +19,6 @@ const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log("this is shipping", shipping);
   //cart count
   const cartCount = cart.reduce((acc, current) => {
     return acc + current.quantity;
@@ -46,6 +46,7 @@ const Cart = () => {
   return (
     <>
       {/* <Hero data={heroData.cart} /> */}
+      <Navbar />
       <div className="py-[100px]">
         {cart.length > 0 ? (
           <div className="container mx-auto mt-10 p-6">

@@ -57,7 +57,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4">
           <nav className="flex justify-between items-center py-5">
             <div>
-              <h2>EvStore</h2>
+              <h2 className="text-[24px] lg:text-[30px]">EvStore</h2>
             </div>
 
             <div className="hidden lg:block">
@@ -78,26 +78,28 @@ const Navbar = () => {
                 })}
               </ul>
             </div>
-            <div className=" flex items-center gap-6">
-              <IoMdLogIn className="text-3xl cursor-pointer" />
-              <div>
-                <Theme />
-              </div>
+            <div className=" flex items-center gap-8 ">
+              <div className="flex items-center gap-3">
+                <IoMdLogIn className="lg:text-3xl text-[25px] cursor-pointer hover:text-orange transition-all ease-in-out duration-200" />
+                <div>
+                  <Theme />
+                </div>
 
-              <div
-                onClick={() => navigate("/cart")}
-                className="relative cursor-pointer"
-              >
-                <PiShoppingCartSimpleBold className="text-2xl" />
+                <div
+                  onClick={() => navigate("/cart")}
+                  className="relative cursor-pointer"
+                >
+                  <PiShoppingCartSimpleBold className="lg:text-3xl text-[25px] hover:text-orange transition-all ease-in-out duration-200" />
 
-                <span className="absolute top-[-10px] right-[-17px] text-white flex items-center justify-center bg-orange rounded-2xl h-6 w-6">
-                  {quantityCount}
-                </span>
+                  <span className="absolute top-[-10px] right-[-17px] text-white flex items-center justify-center bg-orange rounded-2xl h-6 w-6">
+                    {quantityCount}
+                  </span>
+                </div>
               </div>
-              <div className="lg:hidden flex flex-row  ">
+              <div className="lg:hidden flex flex-row gap-2 ">
                 <RxHamburgerMenu
                   onClick={() => setIsActive(true)}
-                  className={`${isActive ? "hidden" : "block"} text-3xl cursor-pointer`}
+                  className={`${isActive ? "hidden" : "block"} lg:text-3xl text-2xl cursor-pointer`}
                 />
                 <IoCloseSharp
                   onClick={() => setIsActive(false)}

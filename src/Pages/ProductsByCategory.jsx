@@ -54,16 +54,18 @@ const ProductsByCategory = () => {
           >
             Explore {productName} Products
           </h2>
-          {/* left side */}
+
           <div className={` flex gap-7 justify-between`}>
+            {/* black overlay */}
             <div
               onClick={() => {
                 setIsActiveFilterBar(false);
               }}
               className={`${isActiveFilterBar ? "fixed inset-0 bg-black/50 z-10 block lg:hidden" : "hidden "}  `}
             ></div>
+            {/* left side */}
             <div
-              className={` ${isActiveFilterBar ? "block" : "hidden"} rounded-sm  transition-all duration-300 ease-in-out lg:relative fixed top-0 w-[90%] h-screen z-10 left-0 lg:block ${isDark ? "bg-base-200" : "bg-gray"}   lg:w-[20%] lg:p-10 p-5`}
+              className={` ${isActiveFilterBar ? "fixed top-0 " : "hidden"}  rounded-sm  transition-all duration-300 ease-in-out lg:sticky lg:block lg:top-[80px]   w-[90%] h-screen z-10 left-0  ${isDark ? "bg-base-200" : "bg-gray"}   lg:w-[20%] lg:p-10 p-5`}
             >
               <p>Filter</p>
               <div className="flex flex-col gap-15">
