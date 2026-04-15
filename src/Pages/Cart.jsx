@@ -18,7 +18,7 @@ const Cart = () => {
   const [discountAmount, setDiscountAmount] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { isDark } = useSelector((state) => state.theme);
   //cart count
   const cartCount = cart.reduce((acc, current) => {
     return acc + current.quantity;
@@ -50,14 +50,18 @@ const Cart = () => {
       <div className="py-[100px]">
         {cart.length > 0 ? (
           <div className="container mx-auto mt-10 p-6">
-            <div className="flex flex-col lg:flex-row shadow-lg bg-white rounded-lg overflow-hidden border border-gray-100">
+            <div
+              className={`flex flex-col lg:flex-row shadow-lg bg-white rounded-lg overflow-hidden border ${isDark ? " border-base-100" : " border-gray-100"}`}
+            >
               {/* Left Side: Product List */}
-              <div className="w-full lg:w-3/4 bg-white px-6 md:px-10 py-10">
-                <div className="flex justify-between border-b pb-8">
-                  <h1 className="font-bold text-2xl text-gray-800">
+              <div
+                className={`w-full lg:w-3/4 ${isDark ? "bg-base-200  " : "bg-white"}  px-6 md:px-10 py-10`}
+              >
+                <div className="flex justify-between border-b lg:pb-8 pb-4">
+                  <h1 className="font-bold text-[14px] lg:text-2xl text-gray-800">
                     Shopping Cart
                   </h1>
-                  <h2 className="font-semibold text-2xl text-gray-600">
+                  <h2 className="font-semibold text-[14px] lg:text-2xl text-gray-600">
                     {cartCount} Items
                   </h2>
                 </div>
@@ -101,7 +105,7 @@ const Cart = () => {
                     <div className="flex items-center gap-3 justify-center w-1/5">
                       <button
                         onClick={() => dispatch(decreaseQty(item.id))}
-                        className="w-8 h-8 flex items-center justify-center border rounded-md hover:bg-gray-200 text-lg   "
+                        className={`w-8 h-8 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray" : ""} text-lg`}
                       >
                         -
                       </button>
