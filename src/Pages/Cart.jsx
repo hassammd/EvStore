@@ -9,6 +9,8 @@ import {
 } from "../Redux/CartSlice/CartSlice";
 import { useState } from "react";
 import Navbar from "../Components/Navbar";
+import { MdOutlineCancel } from "react-icons/md";
+import { RxCross2 } from "react-icons/rx";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -94,7 +96,8 @@ const Cart = () => {
                           alt={item.title}
                         />
                       </div>
-                      <div className="flex flex-col justify-center lg:ml-4 m-2 flex-grow">
+
+                      <div className=" flex flex-col justify-center lg:ml-4 m-2 flex-grow">
                         <span
                           className={`${isDark ? "text-base" : "text-gray-800"} font-bold text-sm`}
                         >
@@ -102,9 +105,9 @@ const Cart = () => {
                         </span>
                         <span
                           onClick={() => dispatch(removeItem(item.id))}
-                          className="text-red-500 text-xs cursor-pointer hover:underline mt-1 font-medium"
+                          className="  text-red-500 text-xs cursor-pointer hover:underline mt-1 font-medium"
                         >
-                          Remove Item
+                          Remove
                         </span>
                       </div>
                     </div>
@@ -113,7 +116,7 @@ const Cart = () => {
                     <div className="flex items-center gap-3 justify-center w-1/5">
                       <button
                         onClick={() => dispatch(decreaseQty(item.id))}
-                        className={`w-8 h-8 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
+                        className={`lg:w-8 lg:h-8 w-8 h-5 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
                       >
                         -
                       </button>
@@ -124,7 +127,7 @@ const Cart = () => {
                       </span>
                       <button
                         onClick={() => dispatch(increaseQty(item.id))}
-                        className={`w-8 h-8 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
+                        className={`lg:w-8 lg:h-8 w-8 h-5 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
                       >
                         +
                       </button>
