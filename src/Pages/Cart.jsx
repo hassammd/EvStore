@@ -49,25 +49,31 @@ const Cart = () => {
       <Navbar />
       <div className="py-[100px]">
         {cart.length > 0 ? (
-          <div className="container mx-auto mt-10 p-6">
+          <div className="container mx-auto mt-10 lg:p-6 p-4">
             <div
               className={`flex flex-col lg:flex-row shadow-lg bg-white rounded-lg overflow-hidden border ${isDark ? " border-base-100" : " border-gray-100"}`}
             >
               {/* Left Side: Product List */}
               <div
-                className={`w-full lg:w-3/4 ${isDark ? "bg-base-200  " : "bg-white"}  px-6 md:px-10 py-10`}
+                className={`w-full lg:w-3/4 ${isDark ? "bg-base-200 text-base " : "bg-white"}  px-6 md:px-10 py-10`}
               >
                 <div className="flex justify-between border-b lg:pb-8 pb-4">
-                  <h1 className="font-bold text-[14px] lg:text-2xl text-gray-800">
+                  <h1
+                    className={`font-bold text-[14px] lg:text-2xl ${isDark ? "text-base" : "text-gray-800"} `}
+                  >
                     Shopping Cart
                   </h1>
-                  <h2 className="font-semibold text-[14px] lg:text-2xl text-gray-600">
+                  <h2
+                    className={` ${isDark ? "text-base" : "text-gray-800"} font-semibold text-[14px] lg:text-2xl `}
+                  >
                     {cartCount} Items
                   </h2>
                 </div>
 
                 {/* Table Header */}
-                <div className="flex mt-10 mb-5 text-gray-500 text-xs uppercase font-bold tracking-wider">
+                <div
+                  className={`flex mt-10 mb-5 ${isDark ? "text-base" : "text-gray-800"} text-xs uppercase font-bold tracking-wider`}
+                >
                   <h3 className="w-2/5">Product Details</h3>
                   <h3 className="w-1/5 text-center">Quantity</h3>
                   <h3 className="w-1/5 text-center">Price</h3>
@@ -78,7 +84,7 @@ const Cart = () => {
                 {cart.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center hover:bg-gray-50 -mx-4 px-4 py-5 border-b border-gray-100 transition-all"
+                    className="flex  items-center hover:bg-gray-50 -mx-4 px-4 lg:py-5 py-1 border-b border-gray-100 transition-all"
                   >
                     <div className="flex w-2/5">
                       <div className="w-20">
@@ -88,8 +94,10 @@ const Cart = () => {
                           alt={item.title}
                         />
                       </div>
-                      <div className="flex flex-col justify-center ml-4 flex-grow">
-                        <span className="font-bold text-sm text-gray-800">
+                      <div className="flex flex-col justify-center lg:ml-4 m-2 flex-grow">
+                        <span
+                          className={`${isDark ? "text-base" : "text-gray-800"} font-bold text-sm`}
+                        >
                           {item.title}
                         </span>
                         <span
@@ -105,25 +113,31 @@ const Cart = () => {
                     <div className="flex items-center gap-3 justify-center w-1/5">
                       <button
                         onClick={() => dispatch(decreaseQty(item.id))}
-                        className={`w-8 h-8 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray" : ""} text-lg`}
+                        className={`w-8 h-8 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
                       >
                         -
                       </button>
-                      <span className="font-semibold text-gray-700">
+                      <span
+                        className={`${isDark ? "border-gray text-base" : "text-gray-800"} font-semibol`}
+                      >
                         {item.quantity}
                       </span>
                       <button
                         onClick={() => dispatch(increaseQty(item.id))}
-                        className="w-8 h-8 flex items-center justify-center border rounded-md hover:bg-gray-200 text-lg  "
+                        className={`w-8 h-8 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
                       >
                         +
                       </button>
                     </div>
 
-                    <span className="text-center w-1/5 font-semibold text-sm text-gray-700">
+                    <span
+                      className={`text-center w-1/5 font-semibold text-sm ${isDark ? "text-base" : "text-gray-800"}`}
+                    >
                       ${item.price}
                     </span>
-                    <span className="text-center w-1/5 font-bold text-sm text-gray-900">
+                    <span
+                      className={`text-center w-1/5 font-bold text-sm ${isDark ? "text-base" : "text-gray-800"}`}
+                    >
                       ${(item.price * item.quantity).toFixed(2)}
                     </span>
                   </div>
@@ -141,18 +155,26 @@ const Cart = () => {
               </div>
 
               {/* Right Side: Order Summary */}
-              <div className="w-full lg:w-1/4 px-8 py-10 bg-gray-50 border-l border-gray-100">
-                <h2 className="font-bold text-2xl border-b pb-8 text-gray-800">
+              <div
+                className={`w-full lg:w-1/4 px-8 py-10  border-l ${isDark ? " bg-base-100 text-base border-base-100" : "text-gray-800 bg-gray-50 border-gray-100"} `}
+              >
+                <h2
+                  className={`${isDark ? " text-base" : "text-gray-800"} font-bold text-2xl border-b pb-8 `}
+                >
                   Order Summary
                 </h2>
 
-                <div className="flex justify-between mt-10 mb-5 uppercase text-sm font-bold text-gray-600">
+                <div
+                  className={`flex justify-between mt-10 mb-5 uppercase text-sm font-bold ${isDark ? "border-gray text-base" : "text-gray-800"}`}
+                >
                   <span>Items ({cartCount})</span>
                   <span>${subTotal.toFixed(2)}</span>
                 </div>
 
                 <div className="mb-6">
-                  <label className="font-semibold inline-block mb-3 text-sm uppercase text-gray-600">
+                  <label
+                    className={`"font-semibold inline-block mb-3 text-sm uppercase ${isDark ? "border-gray text-base" : "text-gray-800"}`}
+                  >
                     Shipping
                   </label>
                   <select
@@ -165,7 +187,9 @@ const Cart = () => {
                 </div>
 
                 <div className="py-4 border-t border-gray-200">
-                  <label className="font-bold inline-block mb-3 text-sm uppercase text-gray-600">
+                  <label
+                    className={`font-bold inline-block mb-3 text-sm uppercase ${isDark ? "border-gray text-base" : "text-gray-800"}`}
+                  >
                     Promo Code
                   </label>
                   <div className="flex gap-2">

@@ -193,14 +193,22 @@ const ProductsByCategory = () => {
                 <div class=" dropdown">
                   <select
                     onChange={(e) => setProductSort(e.target.value)}
-                    class={` border  ${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"} lg:px-5 lg:py-3`}
+                    class={` border  ${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"} rounded-sm lg:px-5 lg:py-3`}
                     name=""
                     id=""
                   >
-                    <option class="" value="az">
+                    <option
+                      className={`${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"}`}
+                      value="az"
+                    >
                       A to Z
                     </option>
-                    <option value="za">Z to A</option>
+                    <option
+                      className={`${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"} cursor-pointer`}
+                      value="za"
+                    >
+                      Z to A
+                    </option>
                   </select>
                 </div>
               </div>
