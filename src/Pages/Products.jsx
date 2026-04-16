@@ -11,6 +11,7 @@ import { MdViewList } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { addToCart } from "../Redux/CartSlice/CartSlice";
 import { FiShoppingCart } from "react-icons/fi";
+import { FaBagShopping } from "react-icons/fa6";
 
 const Products = () => {
   const [searchedProduct, setSearchedProduct] = useState("");
@@ -24,8 +25,9 @@ const Products = () => {
 
   const data = useSelector((state) => state);
   const { isDark } = useSelector((state) => state.theme);
+  const productssss = useSelector((state) => state.products.products);
 
-  console.log("this is category", data);
+  console.log("this is products", productssss);
 
   const dispatch = useDispatch();
 
@@ -198,12 +200,15 @@ const Products = () => {
                     return (
                       <>
                         <div
-                          onClick={() => dispatch(addToCart(products))}
-                          className={`group relative flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border  ${isDark ? "border-base-200" : "border-gray-200"}  rounded-lg ${isDark ? "bg-base-200" : "bg-gray-50"} w-full sm:w-[45%] md:w-[30%] ${isGridView ? "lg:w-[23%]" : "lg:w-full"}  lg:p-8 cursor-pointer hover:shadow-md`}
+                          className={` group relative flex flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border  ${isDark ? "border-base-200" : "border-gray-200"}  rounded-lg ${isDark ? "bg-base-200" : "bg-gray-50"} w-full sm:w-[45%] xl:w-[22.9%] md:w-[30%] ${isGridView ? "lg:w-[30.8%]" : "lg:w-full"}  lg:p-8 cursor-pointer hover:shadow-md`}
                         >
-                          <div className="flex flex-col items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
+                          {/* overlay */}
+                          <div className="hidden lg:flex flex-col items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
                             <span
-                              onClick={() => dispatch(addToCart(items))}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                dispatch(addToCart(products));
+                              }}
                               className=" flex items-center justify-center h-[70px] w-[70px] border-white"
                             >
                               <FiShoppingCart className="text-3xl text-white" />
@@ -221,6 +226,17 @@ const Products = () => {
                             {products.title}
                           </p>
                           <p className="text-orange">${products.price}</p>
+                          <div
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              dispatch(addToCart(products));
+                            }}
+                            className={`lg:hidden absolute bottom-2 right-2 flex items-center justify-center rounded-t-3xl rounded-br-sm rounded-bl-3xl bg-orange h-[40px] w-[40px]`}
+                          >
+                            <FaBagShopping
+                              className={`text-xl ${isDark ? "text-base" : "text-white"} `}
+                            />
+                          </div>
                         </div>
                       </>
                     );

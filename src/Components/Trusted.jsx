@@ -47,12 +47,12 @@ const Trusted = () => {
             Our Premium Partners
           </h2>
 
-          <div className="flex items-center justify-around">
+          <div className="flex items-center flex-wrap justify-around">
             {trustedBrands.map((items) => {
               return (
                 <div key={items.id}>
                   <img
-                    className="lg:w-[130px] lg:h-[70px]   aspect-video object-contain grayscale contrast-400 hover:filter-none transition duration-500 ease-in-out cursor-pointer"
+                    className="lg:w-[130px] lg:h-[70px] w-[50px] aspect-video object-contain grayscale contrast-400 hover:filter-none transition duration-500 ease-in-out cursor-pointer"
                     src={items.logo}
                     alt=""
                   />

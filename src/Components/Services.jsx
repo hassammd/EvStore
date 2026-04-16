@@ -40,12 +40,14 @@ const Services = () => {
                 // Fragment hata den aur direct div par key lagayen
                 <div
                   key={index}
-                  className={`hover:shadow-md cursor-pointer transition-all duration-300 border  rounded-lg ${isDark ? "bg-base-100 border-base-200" : "bg-gray-50 border-gray-200 "} flex flex-col gap-3 items-center justify-center py-[40px] px-[30px]`}
+                  className={`hover:shadow-md cursor-pointer transition-all duration-300 border w-full md:w-[45%]  rounded-lg ${isDark ? "bg-base-100 border-base-200" : "bg-gray-50 border-gray-200 "} flex flex-col gap-3 items-center justify-center py-[40px] px-[30px]`}
                 >
                   <span className="flex items-center justify-center rounded-full bg-white h-12 w-12 text-orange-500 text-3xl">
                     {items.icon}
                   </span>
-                  <p className={`${isDark ? "text-gray" : "text-gray-900"}`}>
+                  <p
+                    className={`text-center ${isDark ? "text-gray" : "text-gray-900"}`}
+                  >
                     {items.content}
                   </p>
                 </div>

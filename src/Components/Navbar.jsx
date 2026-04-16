@@ -58,7 +58,9 @@ const Navbar = () => {
         <div className="container mx-auto px-4">
           <nav className="flex justify-between items-center py-5">
             <div>
-              <h2 className="text-[24px] lg:text-[30px]">EvStore</h2>
+              <Link to={"/"}>
+                <h2 className="text-[24px] lg:text-[30px]">EvStore</h2>
+              </Link>
             </div>
 
             <div className="hidden lg:block">

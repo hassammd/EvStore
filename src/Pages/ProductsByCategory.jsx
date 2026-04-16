@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByCat } from "../Redux/ProductByCatSlice/ProductsByCatSlice";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../Redux/CartSlice/CartSlice";
+import { FaBagShopping } from "react-icons/fa6";
 const ProductsByCategory = () => {
   const dispatch = useDispatch();
   const { isDark } = useSelector((state) => state.theme);
@@ -212,7 +213,10 @@ const ProductsByCategory = () => {
                       >
                         <div className="flex flex-col items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
                           <span
-                            onClick={() => dispatch(addToCart(items))}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              dispatch(addToCart(items));
+                            }}
                             className=" flex items-center justify-center h-[70px] w-[70px] border-white"
                           >
                             <FiShoppingCart className="text-3xl text-white" />
@@ -232,6 +236,17 @@ const ProductsByCategory = () => {
                         <p className="text-center text-orange">
                           ${items.price}
                         </p>
+                        <div
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            dispatch(addToCart(items));
+                          }}
+                          className={`lg:hidden absolute bottom-2 right-2 flex items-center justify-center rounded-t-3xl rounded-br-sm rounded-bl-3xl bg-orange h-[40px] w-[40px]`}
+                        >
+                          <FaBagShopping
+                            className={`text-xl ${isDark ? "text-base" : "text-white"} `}
+                          />
+                        </div>
                       </div>
                     </>
                   );

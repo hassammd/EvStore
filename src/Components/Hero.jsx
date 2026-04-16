@@ -28,7 +28,7 @@ const Hero = ({ data }) => {
   return (
     <>
       <div
-        className={`${isDark ? "bg-base-300" : "bg-gradient-to-r from-blue-50 to-cyan-50"}  md:pb-[90px] lg:pb-[100px]`}
+        className={`${isDark ? "bg-base-200" : "bg-gradient-to-r from-blue-50 to-cyan-50"}  md:pb-[90px] lg:pb-[100px]`}
       >
         <Navbar />
         <div className="container mx-auto px-4 lg:py-[100px] py-[180px]">
@@ -43,13 +43,13 @@ const Hero = ({ data }) => {
               >
                 {description}
               </p>
-              <button className=" hover:-translate-y-1 transition duration-300 lg:block uppercase bg-orange   py-3 px-10 rounded-sm cursor-pointer">
+              <button className=" text-white hover:-translate-y-1 transition duration-300 lg:block uppercase bg-orange py-3 px-10 rounded-sm cursor-pointer">
                 Shop Now
               </button>
             </div>
             <div className="lg:w-1/2 md:w-1/2  flex text-center">
               <img
-                className="w-full animate-float  duration-300"
+                className="w-full animate-float  duration-1000"
                 src={image}
                 alt=""
               />
