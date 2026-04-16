@@ -209,9 +209,9 @@ const ProductsByCategory = () => {
                   return (
                     <>
                       <div
-                        className={` flex ${isGridView ? "lg:w-[23%] " : "lg:w-full"} group relative flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border  rounded-lg ${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"}  w-full sm:w-[45%] md:w-[30%]  lg:p-8 cursor-pointer hover:shadow-md`}
+                        className={` flex ${isGridView ? "lg:w-[23%]" : "lg:w-full"} group relative flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border  rounded-lg ${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"}  w-full sm:w-[45%] md:w-[30%]  lg:p-8 cursor-pointer hover:shadow-md`}
                       >
-                        <div className="flex flex-col items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
+                        <div className="hidden lg:flex flex-col items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
                           <span
                             onClick={(e) => {
                               e.stopPropagation();
