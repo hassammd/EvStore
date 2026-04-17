@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Theme from "./Theme";
 import { IoMdLogIn } from "react-icons/io";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
+import { FaRegUser } from "react-icons/fa6";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
@@ -83,7 +84,10 @@ const Navbar = () => {
             </div>
             <div className=" flex items-center gap-8 ">
               <div className="flex items-center gap-3">
-                <IoMdLogIn className="lg:text-3xl text-[25px] cursor-pointer hover:text-orange transition-all ease-in-out duration-200" />
+                <FaRegUser
+                  onClick={() => navigate("/auth")}
+                  className="lg:text-2xl text-[25px] cursor-pointer hover:text-orange transition-all ease-in-out duration-200"
+                />
                 <div>
                   <Theme />
                 </div>
@@ -92,7 +96,7 @@ const Navbar = () => {
                   onClick={() => navigate("/cart")}
                   className="relative cursor-pointer"
                 >
-                  <PiShoppingCartSimpleBold className="lg:text-3xl text-[25px] hover:text-orange transition-all ease-in-out duration-200" />
+                  <PiShoppingCartSimpleBold className="lg:text-2xl text-[25px] hover:text-orange transition-all ease-in-out duration-200" />
 
                   <span className="absolute top-[-10px] right-[-17px] text-white flex items-center justify-center bg-orange rounded-2xl h-6 w-6">
                     {quantityCount}
@@ -102,11 +106,11 @@ const Navbar = () => {
               <div className="lg:hidden flex flex-row gap-2 ">
                 <RxHamburgerMenu
                   onClick={() => setIsActive(true)}
-                  className={`${isActive ? "hidden" : "block"} lg:text-3xl text-2xl cursor-pointer`}
+                  className={`${isActive ? "hidden" : "block"} lg:text-2xl text-2xl cursor-pointer`}
                 />
                 <IoCloseSharp
                   onClick={() => setIsActive(false)}
-                  className={`${isActive ? "block" : "hidden"} lg:text-3xl text-2xl`}
+                  className={`${isActive ? "block" : "hidden"} lg:text-2xl text-2xl`}
                 />
               </div>
               {/* mobile navigation */}

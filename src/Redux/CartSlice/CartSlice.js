@@ -6,7 +6,6 @@ const initialState = {
   error: null,
 };
 
-console.log("this is initialState", initialState.cart);
 const CartSlice = createSlice({
   name: "cart",
   initialState,

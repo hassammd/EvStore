@@ -5,10 +5,17 @@
   --color-orange: #ff7420;
   --color-gray: #f8fafc;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
+  position: relative;
   font-family: "Poppins", sans-serif;
 }
 
+select {
+  appearance: none;
+}
 @layer base {
   h1 {
     /* Default size (mobile) */

@@ -11,7 +11,7 @@ import { MdViewList } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { addToCart } from "../Redux/CartSlice/CartSlice";
 import { FiShoppingCart } from "react-icons/fi";
-import { FaBagShopping } from "react-icons/fa6";
+import { FaAngleDown, FaBagShopping } from "react-icons/fa6";
 
 const Products = () => {
   const [searchedProduct, setSearchedProduct] = useState("");
@@ -172,9 +172,9 @@ const Products = () => {
                       <MdViewList className="lg:text-3xl cursor-pointer" />
                     </span>
                   </div>
-                  <div className=" dropdown">
+                  <div className=" dropdown relative">
                     <select
-                      className={` border rounded-sm border-gray-200 ${isDark ? "bg-base-200" : "bg-gray-50"} lg:px-5 lg:py-3`}
+                      className={`appearance-none border rounded-sm border-gray-200 ${isDark ? "bg-base-200" : "bg-gray-50"} px-6 pr-8 py-2 lg:px-10 lg:py-3`}
                       name=""
                       value={sortOrder}
                       id=""
@@ -185,6 +185,9 @@ const Products = () => {
                       </option>
                       <option value="za">Z to A</option>
                     </select>
+                    <span className="absolute right-2 top-3 lg:right-2 lg:top-4">
+                      <FaAngleDown />
+                    </span>
                   </div>
                 </div>
               </div>

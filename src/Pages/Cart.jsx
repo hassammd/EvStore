@@ -225,17 +225,23 @@ const Cart = () => {
           </div>
         ) : (
           /* Empty Cart State */
-          <div className="min-h-[60vh] flex flex-col justify-center items-center px-4">
-            <div className="bg-white p-10 rounded-2xl   flex flex-col items-center max-w-lg text-center gap-6">
+          <div className=" h-screen flex flex-col justify-center items-center  ">
+            <div
+              className={`${isDark ? "bg-base-200" : "bg-white"}  p-10 rounded-2xl   flex flex-col items-center max-w-lg text-center gap-6`}
+            >
               <div className="w-24 h-24 bg-orange-50 rounded-full flex items-center justify-center">
                 <span className="text-6xl text-[#FF7420]">
                   <FiShoppingCart />
                 </span>
               </div>
-              <h1 className="text-2xl font-bold text-gray-800">
+              <h1
+                className={` text-2xl font-bold ${isDark ? "text-base" : "text-gray-800"} `}
+              >
                 Your Cart is Empty!
               </h1>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <p
+                className={`${isDark ? "text-base" : "text-gray-800"}  text-sm leading-relaxed`}
+              >
                 Looks like you haven't added anything to your cart yet. Explore
                 our shop and find something you love!
               </p>

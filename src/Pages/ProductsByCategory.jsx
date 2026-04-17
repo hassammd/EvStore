@@ -52,7 +52,7 @@ const ProductsByCategory = () => {
           <h2
             class={`capitalize  text-xl md:text-3xl text-center lg:mb-20 md:mb-15 sm:mb-15 mb-10 ${isDark ? "text-base" : "text-gray-900"}  tracking-tight`}
           >
-            Explore {productName} Products
+            Explore {productName}
           </h2>
 
           <div className={` flex gap-7 justify-between`}>

@@ -10,6 +10,8 @@ import Cart from "./Pages/Cart";
 import ThankYou from "./Pages/ThankYou";
 import ErrorPage from "./Pages/ErrorPage";
 import ProductsByCategory from "./Pages/ProductsByCategory";
+import ScrollToTop from "./Components/ScrollToTop";
+import Auth from "./Pages/Auth";
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/auth" element={<Auth />} />
           <Route
             path="/category/:productName"
             element={<ProductsByCategory />}
