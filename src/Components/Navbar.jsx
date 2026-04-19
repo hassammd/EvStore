@@ -13,6 +13,7 @@ const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { isDark } = useSelector((state) => state.theme);
+  const userInfo = useSelector((state) => state.SignIn.user);
 
   useEffect(() => {
     const scrollHanler = () => {
@@ -84,10 +85,15 @@ const Navbar = () => {
             </div>
             <div className=" flex items-center gap-8 ">
               <div className="flex items-center gap-3">
-                <FaRegUser
-                  onClick={() => navigate("/auth")}
-                  className="lg:text-2xl text-[25px] cursor-pointer hover:text-orange transition-all ease-in-out duration-200"
-                />
+                {userInfo?.email ? (
+                  <span>{userInfo.email}</span>
+                ) : (
+                  <FaRegUser
+                    onClick={() => navigate("/auth")}
+                    className="lg:text-2xl text-[25px] cursor-pointer hover:text-orange transition-all ease-in-out duration-200"
+                  />
+                )}
+
                 <div>
                   <Theme />
                 </div>

@@ -12,8 +12,30 @@ import ErrorPage from "./Pages/ErrorPage";
 import ProductsByCategory from "./Pages/ProductsByCategory";
 import ScrollToTop from "./Components/ScrollToTop";
 import Auth from "./Pages/Auth";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../Firebase";
+import { useDispatch } from "react-redux";
+import { setUser } from "./Redux/AuthSlice/SignInSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+          }),
+        );
+      } else {
+        dispatch(setUser(null));
+      }
+    });
+    return () => unsubscribe();
+  }, [dispatch]);
   return (
     <>
       <Routes>

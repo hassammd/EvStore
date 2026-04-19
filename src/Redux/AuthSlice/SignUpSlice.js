@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 import { auth } from "../../../Firebase";
 
@@ -18,13 +18,17 @@ const signUpUser = createAsyncThunk(
         email,
         password,
       );
-      console.log(userCredential);
+      await updateProfile(userCredential.user, {
+        displayName: name,
+      });
+
       return {
         uid: userCredential.user.uid,
         email: userCredential.user.email,
+        displayName: name,
       };
     } catch (error) {
-      rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   },
 );
