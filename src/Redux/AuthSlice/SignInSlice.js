@@ -10,11 +10,18 @@ const initialState = {
 
 const signInUser = createAsyncThunk(
   "auth/signin",
-  async (payload, { rejectWithValue }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
-      const userSignIn = await signInWithEmailAndPassword(auth);
+      const userSignIn = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      return {
+        email: userSignIn.user.email,
+      };
     } catch (error) {
-      rejectWithValue("Something Went Wrong");
+      return rejectWithValue(error.code);
     }
   },
 );
@@ -23,15 +30,16 @@ const SignInSlice = createSlice({
   name: "signIn",
   initialState,
   reducers: {},
-  extraReducers: (addBuilder) => {
-    addBuilder.addCase(signInUser.pending, (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(signInUser.pending, (state) => {
       state.loading = true;
     });
-    addBuilder.addCase(signInUser.fulfilled, (state, action) => {
+    builder.addCase(signInUser.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload;
     });
-    addBuilder.addCase(signInUser.rejected, (state, action) => {
+    builder.addCase(signInUser.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.payload;
     });
   },

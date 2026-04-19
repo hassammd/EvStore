@@ -4,14 +4,19 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { signInUser } from "../Redux/AuthSlice/SignInSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = ({ setIsUserCreate }) => {
   const { isDark } = useSelector((state) => state.theme);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState({});
+  const [logerror, setLogError] = useState({});
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { error } = useSelector((state) => state.SignIn);
+  console.log("this is selector", error);
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -24,11 +29,13 @@ const SignIn = ({ setIsUserCreate }) => {
       newError.email = "Invalid Email";
     }
     if (Object.keys(newError).length > 0) {
-      setError(newError);
+      setLogError(newError, error);
+      navigate("/auth");
     } else {
       setEmail("");
       setPassword("");
-      dispatch(signInUser(email, password));
+      dispatch(signInUser({ email, password }));
+      navigate("/");
     }
   };
 
@@ -49,7 +56,8 @@ const SignIn = ({ setIsUserCreate }) => {
               <span className="absolute top-4">
                 <MdOutlineMailOutline className="text-xl" />
               </span>
-              <span className="text-sm text-red-600">{error.email}</span>
+              <span className="text-sm text-red-600">{logerror.email}</span>
+              <span className="text-sm text-red-600">{error}</span>
             </div>
             <div className="flex flex-col gap-2 relative">
               <input
@@ -62,7 +70,7 @@ const SignIn = ({ setIsUserCreate }) => {
               <span className="absolute top-4">
                 <RiLockPasswordLine className="text-xl " />
               </span>
-              <span className="text-sm text-red-600">{error.password}</span>
+              <span className="text-sm text-red-600">{logerror.password}</span>
             </div>
             <div>
               <input

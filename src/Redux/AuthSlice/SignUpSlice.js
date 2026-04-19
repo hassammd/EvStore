@@ -19,31 +19,29 @@ const signUpUser = createAsyncThunk(
         password,
       );
       console.log(userCredential);
+      return {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+      };
     } catch (error) {
-      console.log(error);
+      rejectWithValue(error.message);
     }
-
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
   },
 );
 
 const SignUpSlice = createSlice({
   name: "SignIn",
   initialState,
-  extraReducers: (addBuilder) => {
-    addBuilder.addCase(signUpUser.pending, (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(signUpUser.pending, (state, action) => {
       state.loading = true;
       state.error = null;
     });
-    addBuilder.addCase(signUpUser.fulfilled, (state, action) => {
+    builder.addCase(signUpUser.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload;
     });
-    addBuilder.addCase(signUpUser.rejected, (state, action) => {
+    builder.addCase(signUpUser.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });
