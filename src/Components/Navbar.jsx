@@ -1,13 +1,15 @@
-import { GrCart } from "react-icons/gr";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Theme from "./Theme";
-import { IoMdLogIn } from "react-icons/io";
+
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import { FaRegUser } from "react-icons/fa6";
+import { signOut } from "firebase/auth";
+import { auth } from "../../Firebase";
+import { logOutUser } from "../Redux/AuthSlice/SignInSlice";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
@@ -52,6 +54,18 @@ const Navbar = () => {
     },
   ];
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      dispatch(logOutUser());
+      navigate("/auth");
+    } catch (error) {
+      console.log("Logout Error", error.message);
+    }
+  };
+
   return (
     <>
       <div
@@ -85,8 +99,23 @@ const Navbar = () => {
             </div>
             <div className=" flex items-center gap-8 ">
               <div className="flex items-center gap-3">
-                {userInfo?.email ? (
-                  <span>{userInfo.email}</span>
+                {userInfo ? (
+                  <details className="dropdown">
+                    <summary className="btn m-0 bg-transparent border-0 shadow-none">
+                      {userInfo.displayName}
+                    </summary>
+                    <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                      <li>
+                        <a>My Orders</a>
+                      </li>
+                      <li>
+                        <a>Profile</a>
+                      </li>
+                      <li onClick={handleLogout}>
+                        <a>Logout</a>
+                      </li>
+                    </ul>
+                  </details>
                 ) : (
                   <FaRegUser
                     onClick={() => navigate("/auth")}

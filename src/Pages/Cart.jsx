@@ -9,8 +9,9 @@ import {
 } from "../Redux/CartSlice/CartSlice";
 import { useState } from "react";
 import Navbar from "../Components/Navbar";
-import { MdOutlineCancel } from "react-icons/md";
-import { RxCross2 } from "react-icons/rx";
+import CheckOut from "../Components/CheckOut";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../Firebase";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -18,9 +19,11 @@ const Cart = () => {
   const [promoCode, setPromoCode] = useState("");
   const [isInvalidPromo, setIsInvalidPromo] = useState(false);
   const [discountAmount, setDiscountAmount] = useState(0);
+  const [isCheckOut, setIsCheckOut] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isDark } = useSelector((state) => state.theme);
+
   //cart count
   const cartCount = cart.reduce((acc, current) => {
     return acc + current.quantity;
@@ -45,6 +48,93 @@ const Cart = () => {
 
   //total cost
   const totalCost = subTotal + Number(shipping) - discountAmount;
+
+  //form States
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [house, setHouse] = useState("");
+  const [Landmark, setLandmark] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState({});
+
+  console.log(error);
+  const handleForm = async (e) => {
+    e.preventDefault();
+    const newError = {};
+    if (!firstName.trim()) {
+      newError.firstName = "Enter your First Name";
+    }
+    if (!lastName.trim()) {
+      newError.lastName = "Enter Your Last Name";
+    }
+    if (!email.trim()) {
+      newError.email = "Enter your Email";
+    }
+    if (!phone.trim()) {
+      newError.phone = "Enter your Number";
+    }
+    if (!city.trim()) {
+      newError.city = "Enter your City";
+    }
+    if (!house.trim()) {
+      newError.house = "Enter your house";
+    }
+    if (!state.trim()) {
+      newError.state = "Enter your state";
+    }
+    if (!zip.trim()) {
+      newError.zip = "Enter zip Code";
+    }
+    if (Object.keys(newError).length > 0) {
+      setError(newError);
+    } else {
+      try {
+        const orderData = {
+          customerDetails: {
+            firstName,
+            lastName,
+            email,
+            phone,
+            address: {
+              city,
+              house,
+              state,
+              zip,
+              Landmark: Landmark || "",
+            },
+            description: description || "",
+          },
+          items: cart,
+          totalAmount: totalCost,
+          shippingFee: shipping,
+          discount: discountAmount,
+          orderStatus: "pending",
+          createdAt: new Date(),
+        };
+        // sav data at firestore
+        const docRef = await addDoc(collection(db, "orders"), orderData);
+        alert("Order Confirmed! Your Order ID is: " + docRef.id);
+      } catch (err) {
+        console.log("this is order error", err);
+        // alert("Kuch masla hua hai, dobara koshish karein.");
+      }
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setCity("");
+      setHouse("");
+      setState("");
+      setZip("");
+      setError({});
+    }
+  };
+
   return (
     <>
       {/* <Hero data={heroData.cart} /> */}
@@ -52,110 +142,152 @@ const Cart = () => {
       <div className="py-[100px]">
         {cart.length > 0 ? (
           <div className="container mx-auto mt-10 lg:p-6 p-4">
+            <div className="breadcrumbs text-sm">
+              <ul>
+                <li>
+                  <a>Cart</a>
+                </li>
+                <li>
+                  <a>Shipping</a>
+                </li>
+                <li>Payment</li>
+              </ul>
+            </div>
             <div
               className={`flex flex-col lg:flex-row shadow-lg bg-white rounded-lg overflow-hidden border ${isDark ? " border-base-100" : " border-gray-100"}`}
             >
-              {/* Left Side: Product List */}
-              <div
-                className={`w-full lg:w-3/4 ${isDark ? "bg-base-200 text-base " : "bg-white"}  px-6 md:px-10 py-10`}
-              >
-                <div className="flex justify-between border-b lg:pb-8 pb-4">
-                  <h1
-                    className={`font-bold text-[14px] lg:text-2xl ${isDark ? "text-base" : "text-gray-800"} `}
-                  >
-                    Shopping Cart
-                  </h1>
-                  <h2
-                    className={` ${isDark ? "text-base" : "text-gray-800"} font-semibold text-[14px] lg:text-2xl `}
-                  >
-                    {cartCount} Items
-                  </h2>
-                </div>
-
-                {/* Table Header */}
+              {!isCheckOut ? (
+                //Left Side: Product List
                 <div
-                  className={`flex mt-10 mb-5 ${isDark ? "text-base" : "text-gray-800"} text-xs uppercase font-bold tracking-wider`}
+                  className={`w-full lg:w-3/4 ${isDark ? "bg-base-200 text-base " : "bg-white"}  px-6 md:px-10 py-10`}
                 >
-                  <h3 className="w-2/5">Product Details</h3>
-                  <h3 className="w-1/5 text-center">Quantity</h3>
-                  <h3 className="w-1/5 text-center">Price</h3>
-                  <h3 className="w-1/5 text-center">Total</h3>
-                </div>
-
-                {/* Product Rows */}
-                {cart.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex  items-center hover:bg-gray-50 -mx-4 px-4 lg:py-5 py-1 border-b border-gray-100 transition-all"
-                  >
-                    <div className="flex w-2/5">
-                      <div className="w-20">
-                        <img
-                          className="rounded"
-                          src={item.thumbnail}
-                          alt={item.title}
-                        />
-                      </div>
-
-                      <div className=" flex flex-col justify-center lg:ml-4 m-2 flex-grow">
-                        <span
-                          className={`${isDark ? "text-base" : "text-gray-800"} font-bold text-sm`}
-                        >
-                          {item.title}
-                        </span>
-                        <span
-                          onClick={() => dispatch(removeItem(item.id))}
-                          className="  text-red-500 text-xs cursor-pointer hover:underline mt-1 font-medium"
-                        >
-                          Remove
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Quantity Controls */}
-                    <div className="flex items-center gap-3 justify-center w-1/5">
-                      <button
-                        onClick={() => dispatch(decreaseQty(item.id))}
-                        className={`lg:w-8 lg:h-8 w-8 h-5 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
-                      >
-                        -
-                      </button>
-                      <span
-                        className={`${isDark ? "border-gray text-base" : "text-gray-800"} font-semibol`}
-                      >
-                        {item.quantity}
-                      </span>
-                      <button
-                        onClick={() => dispatch(increaseQty(item.id))}
-                        className={`lg:w-8 lg:h-8 w-8 h-5 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
-                      >
-                        +
-                      </button>
-                    </div>
-
-                    <span
-                      className={`text-center w-1/5 font-semibold text-sm ${isDark ? "text-base" : "text-gray-800"}`}
+                  <div className="flex justify-between border-b lg:pb-8 pb-4">
+                    <h1
+                      className={`font-bold text-[14px] lg:text-2xl ${isDark ? "text-base" : "text-gray-800"} `}
                     >
-                      ${item.price}
-                    </span>
-                    <span
-                      className={`text-center w-1/5 font-bold text-sm ${isDark ? "text-base" : "text-gray-800"}`}
+                      Shopping Cart
+                    </h1>
+                    <h2
+                      className={` ${isDark ? "text-base" : "text-gray-800"} font-semibold text-[14px] lg:text-2xl `}
                     >
-                      ${(item.price * item.quantity).toFixed(2)}
-                    </span>
+                      {cartCount} Items
+                    </h2>
                   </div>
-                ))}
 
-                <button
-                  onClick={() => navigate("/")}
-                  className="cursor-pointer inline-flex items-center font-semibold text-[#FF7420] text-sm mt-10 hover:translate-x-[-5px] transition-transform"
-                >
-                  <svg className="fill-current mr-2 w-4" viewBox="0 0 448 512">
-                    <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
-                  </svg>
-                  Continue Shopping
-                </button>
-              </div>
+                  {/* Table Header */}
+                  <div
+                    className={`flex mt-10 mb-5 ${isDark ? "text-base" : "text-gray-800"} text-xs uppercase font-bold tracking-wider`}
+                  >
+                    <h3 className="w-2/5">Product Details</h3>
+                    <h3 className="w-1/5 text-center">Quantity</h3>
+                    <h3 className="w-1/5 text-center">Price</h3>
+                    <h3 className="w-1/5 text-center">Total</h3>
+                  </div>
+
+                  {/* Product Rows */}
+                  {cart.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex  items-center hover:bg-gray-50 -mx-4 px-4 lg:py-5 py-1 border-b border-gray-100 transition-all"
+                    >
+                      <div className="flex w-2/5">
+                        <div className="w-20">
+                          <img
+                            className="rounded"
+                            src={item.thumbnail}
+                            alt={item.title}
+                          />
+                        </div>
+
+                        <div className=" flex flex-col justify-center lg:ml-4 m-2 flex-grow">
+                          <span
+                            className={`${isDark ? "text-base" : "text-gray-800"} font-bold text-sm`}
+                          >
+                            {item.title}
+                          </span>
+                          <span
+                            onClick={() => dispatch(removeItem(item.id))}
+                            className="  text-red-500 text-xs cursor-pointer hover:underline mt-1 font-medium"
+                          >
+                            Remove
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Quantity Controls */}
+                      <div className="flex items-center gap-3 justify-center w-1/5">
+                        <button
+                          onClick={() => dispatch(decreaseQty(item.id))}
+                          className={`lg:w-8 lg:h-8 w-8 h-5 flex items-center justify-center border rounded-md cursor-pointer hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
+                        >
+                          -
+                        </button>
+                        <span
+                          className={`${isDark ? "border-gray text-base" : "text-gray-800"}  font-semibol`}
+                        >
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() => dispatch(increaseQty(item.id))}
+                          className={`cursor-pointer lg:w-8 lg:h-8 w-8 h-5 flex items-center justify-center border rounded-md hover:bg-gray-200 ${isDark ? "border-gray text-base" : "text-gray-800"} text-lg`}
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <span
+                        className={`text-center w-1/5 font-semibold text-sm ${isDark ? "text-base" : "text-gray-800"}`}
+                      >
+                        ${item.price}
+                      </span>
+                      <span
+                        className={`text-center w-1/5 font-bold text-sm ${isDark ? "text-base" : "text-gray-800"}`}
+                      >
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </span>
+                    </div>
+                  ))}
+
+                  <button
+                    onClick={() => navigate("/")}
+                    className="cursor-pointer inline-flex items-center font-semibold text-[#FF7420] text-sm mt-10 hover:translate-x-[-5px] transition-transform"
+                  >
+                    <svg
+                      className="fill-current mr-2 w-4"
+                      viewBox="0 0 448 512"
+                    >
+                      <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
+                    </svg>
+                    Continue Shopping
+                  </button>
+                </div>
+              ) : (
+                //left side checkout section
+                <CheckOut
+                  firstName={firstName}
+                  setFirstName={setFirstName}
+                  lastName={lastName}
+                  setLastName={setLastName}
+                  email={email}
+                  setEmail={setEmail}
+                  phone={phone}
+                  setPhone={setPhone}
+                  city={city}
+                  setCity={setCity}
+                  house={house}
+                  Landmark={Landmark}
+                  setLandmark={setLandmark}
+                  setHouse={setHouse}
+                  state={state}
+                  setState={setState}
+                  zip={zip}
+                  setZip={setZip}
+                  description={description}
+                  setDescription={setDescription}
+                  error={error}
+                />
+              )}
+              {/*  */}
 
               {/* Right Side: Order Summary */}
               <div
@@ -216,9 +348,21 @@ const Cart = () => {
                     <span>Total cost</span>
                     <span>${totalCost.toFixed(2)}</span>
                   </div>
-                  <button className="bg-orange font-bold cursor-pointer py-4 mt-6 text-sm text-white uppercase w-full rounded shadow-lg transition-all active:scale-[0.98]">
-                    Proceed to Checkout
-                  </button>
+                  {!isCheckOut ? (
+                    <button
+                      onClick={() => setIsCheckOut(true)}
+                      className="bg-orange font-bold cursor-pointer py-4 mt-6 text-sm text-white uppercase w-full rounded shadow-lg transition-all active:scale-[0.98]"
+                    >
+                      Proceed to Checkout
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleForm}
+                      className="bg-orange font-bold cursor-pointer py-4 mt-6 text-sm text-white uppercase w-full rounded shadow-lg transition-all active:scale-[0.98]"
+                    >
+                      Confirm Order
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

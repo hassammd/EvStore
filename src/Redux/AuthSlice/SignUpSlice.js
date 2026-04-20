@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-import { auth } from "../../../Firebase";
+import { auth, db } from "../../../Firebase";
+import { doc, setDoc } from "firebase/firestore/lite";
 
 const initialState = {
   user: null,
@@ -18,8 +19,13 @@ const signUpUser = createAsyncThunk(
         email,
         password,
       );
-      await updateProfile(userCredential.user, {
-        displayName: name,
+      const user = userCredential.user;
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name: name,
+        email: email,
+        createdAt: new Date().toISOString(),
+        role: "s",
       });
 
       return {

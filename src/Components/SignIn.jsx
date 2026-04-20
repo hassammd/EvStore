@@ -42,19 +42,23 @@ const SignIn = ({ setIsUserCreate }) => {
   return (
     <>
       <div className="mx-auto bg-gray-100 w-full md:w-1/2 lg:w-1/3   lg:p-15 p-10 rounded-xl">
-        <h3 className="text-center text-2xl">Login</h3>
+        <h3 className={`text-center text-2xl ${isDark ? "text-base" : ""} `}>
+          Login
+        </h3>
         <form action="" onSubmit={loginHandler}>
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-2 relative">
               <input
                 onChange={(e) => setEmail(e.target.value)}
-                className="p-3 pl-8 border-b-1 border-gray-200 border-b-2 outline-0"
+                className={`${isDark ? "text-base-100" : ""}  p-3 pl-8 border-b-1 border-gray-200 border-b-2 outline-0`}
                 type="text"
                 placeholder="Email"
                 value={email}
               />
               <span className="absolute top-4">
-                <MdOutlineMailOutline className="text-xl" />
+                <MdOutlineMailOutline
+                  className={`text-xl ${isDark ? "text-base-100" : ""} `}
+                />
               </span>
               <span className="text-sm text-red-600">{logerror.email}</span>
               <span className="text-sm text-red-600">{error}</span>
@@ -62,15 +66,21 @@ const SignIn = ({ setIsUserCreate }) => {
             <div className="flex flex-col gap-2 relative">
               <input
                 onChange={(e) => setPassword(e.target.value)}
-                className="p-3 pl-8 border-b-1 border-b-2 border-gray-200  outline-0"
+                className={`${isDark ? "text-base-100" : ""}  p-3 pl-8 border-b-1 border-b-2 border-gray-200  outline-0`}
                 type="password"
                 placeholder="Password"
                 value={password}
               />
               <span className="absolute top-4">
-                <RiLockPasswordLine className="text-xl " />
+                <RiLockPasswordLine
+                  className={`text-xl ${isDark ? " text-base-100" : ""} `}
+                />
               </span>
-              <span className="text-sm text-red-600">{logerror.password}</span>
+              <span
+                className={`text-sm ${isDark ? "text-red-600" : "text-red-600"} `}
+              >
+                {logerror.password}
+              </span>
             </div>
             <div>
               <input
@@ -79,7 +89,9 @@ const SignIn = ({ setIsUserCreate }) => {
               />
             </div>
           </div>
-          <span className="text-right block pt-1 text-sm w-full">
+          <span
+            className={`text-right block pt-1 text-sm w-full ${isDark ? "text-base-100" : ""} `}
+          >
             Forgot Password?
           </span>
         </form>
