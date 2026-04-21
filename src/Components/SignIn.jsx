@@ -18,7 +18,7 @@ const SignIn = ({ setIsUserCreate }) => {
   const { error } = useSelector((state) => state.SignIn);
   console.log("this is selector", error);
 
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
     const newError = {};
     if (!email.trim()) {
@@ -26,16 +26,20 @@ const SignIn = ({ setIsUserCreate }) => {
     }
     const emailRegex = /^\S+@\S+\.\S+$/;
     if (!emailRegex.test(email)) {
-      newError.email = "Invalid Email";
+      newError.envalidEmail = "Invalid Email";
     }
     if (Object.keys(newError).length > 0) {
       setLogError(newError, error);
-      navigate("/auth");
     } else {
-      setEmail("");
-      setPassword("");
-      dispatch(signInUser({ email, password }));
-      navigate("/");
+      const result = await dispatch(signInUser({ email, password }));
+      if (signInUser.fulfilled.match(result)) {
+        setEmail("");
+        setPassword("");
+        setLogError({});
+        navigate("/");
+      } else {
+        console.log("Login Failed", result.payload);
+      }
     }
   };
 

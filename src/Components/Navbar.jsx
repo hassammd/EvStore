@@ -8,16 +8,15 @@ import Theme from "./Theme";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import { FaRegUser } from "react-icons/fa6";
 import { signOut } from "firebase/auth";
-import { auth } from "../../Firebase";
+import { auth, db } from "../../Firebase";
 import { logOutUser } from "../Redux/AuthSlice/SignInSlice";
+import { doc } from "firebase/firestore";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { isDark } = useSelector((state) => state.theme);
   const userDetails = useSelector((state) => state.SignIn.user);
-
-  console.log("this is userinfo", userDetails);
 
   useEffect(() => {
     const scrollHanler = () => {
