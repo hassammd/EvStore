@@ -32,10 +32,10 @@ const CheckOut = ({
           </h1>
         </div>
 
-        <div className="w-full p-4">
+        <div className="w-full lg:p-4 py-4">
           <form action="" className="flex flex-wrap gap-6">
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 First Name*
               </label>
               <input
@@ -43,14 +43,14 @@ const CheckOut = ({
                 placeholder="First Name"
                 value={firstName}
                 type="text"
-                className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
-              <span className="text-[12px] text-red-600">
+              <span className="lg:text-sm text-[12px] text-red-600">
                 {error.firstName}
               </span>
             </div>
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 Last Name*
               </label>
               <input
@@ -58,12 +58,12 @@ const CheckOut = ({
                 placeholder="Last Name"
                 type="text"
                 value={lastName}
-                className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
               <span className="text-[12px] text-red-600">{error.lastName}</span>
             </div>
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px]mb-1 block">
                 Email*
               </label>
               <input
@@ -71,7 +71,7 @@ const CheckOut = ({
                 placeholder="example@mail.com"
                 value={email}
                 type="text"
-                className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
               <span className="text-[12px] text-red-600">{error.email}</span>
               <span className="text-[12px] text-red-600">
@@ -79,7 +79,7 @@ const CheckOut = ({
               </span>
             </div>
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 Phone number*
               </label>
               <input
@@ -87,12 +87,12 @@ const CheckOut = ({
                 placeholder="0300 1234567"
                 value={phone}
                 type="number"
-                className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
               <span className="text-[12px] text-red-600">{error.phone}</span>
             </div>
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 City*
               </label>
               <input
@@ -100,12 +100,12 @@ const CheckOut = ({
                 placeholder="City"
                 value={city}
                 type="text"
-                className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
               <span className="text-[12px] text-red-600">{error.city}</span>
             </div>
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 House/Apartment Number*
               </label>
               <input
@@ -113,23 +113,23 @@ const CheckOut = ({
                 value={house}
                 placeholder="House No"
                 type="text"
-                className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
               <span className="text-[12px] text-red-600">{error.house}</span>
             </div>
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 Near Landmark (Optional)
               </label>
               <input
                 onChange={(e) => setLandmark(e.target.value)}
                 placeholder="Landmark"
                 type="text"
-                className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
             </div>
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 State*
               </label>
               <input
@@ -137,12 +137,12 @@ const CheckOut = ({
                 placeholder="state"
                 type="text"
                 value={state}
-                className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
               <span className="text-[12px] text-red-600">{error.state}</span>
             </div>
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 Zip Code*
               </label>
               <input
@@ -150,19 +150,19 @@ const CheckOut = ({
                 value={zip}
                 placeholder="0000"
                 type="text"
-                className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
               <span className="text-[12px] text-red-600">{error.zip}</span>
             </div>
             <div className="w-full">
-              <label htmlFor="" className="text-sm mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 Description
               </label>
               <textarea
                 onChange={(e) => setDescription(e.target.value)}
                 rows={8}
                 placeholder="Any special instructions for delivery..."
-                className="text-sm w-full border-gray-200 border px-2 py-2 rounded-sm"
+                className="lg:text-sm text-[12px] w-full border-gray-200 border px-2 py-2 rounded-sm"
                 name=""
                 id=""
               ></textarea>

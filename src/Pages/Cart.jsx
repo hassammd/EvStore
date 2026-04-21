@@ -320,7 +320,7 @@ const Cart = () => {
                   </label>
                   <select
                     onChange={(e) => setShipping(Number(e.target.value))}
-                    className="block p-3 border border-gray-300 text-gray-700 w-full text-sm outline-none rounded bg-white focus:border-orange-400"
+                    className="lg:text-sm text-[12px] block p-3 border border-gray-300 text-gray-700 w-full text-sm outline-none rounded bg-white focus:border-orange-400"
                   >
                     <option value="10">Standard shipping - $10.00</option>
                     <option value="25">Express shipping - $25.00</option>
@@ -338,7 +338,7 @@ const Cart = () => {
                       onChange={(e) => setPromoCode(e.target.value)}
                       type="text"
                       placeholder="Enter SAVE10"
-                      className={`${isInvalidPromo && "border-red-600"} p-3 text-sm w-full rounded border border-gray-300 outline-none focus:border-orange-400`}
+                      className={`${isInvalidPromo && "border-red-600"} p-3 lg:text-sm text-[12px] w-full rounded border border-gray-300 outline-none focus:border-orange-400`}
                     />
                     <button
                       onClick={promoHandler}
