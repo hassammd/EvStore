@@ -63,7 +63,7 @@ const CheckOut = ({
               <span className="text-[12px] text-red-600">{error.lastName}</span>
             </div>
             <div className="w-full sm:w-[47%] lg:w-[30%]">
-              <label htmlFor="" className="lg:text-sm text-[12px]mb-1 block">
+              <label htmlFor="" className="lg:text-sm text-[12px] mb-1 block">
                 Email*
               </label>
               <input

@@ -10,8 +10,6 @@ const OrderSummary = () => {
 
   console.log("this is orderData", orderData);
 
-  // http://localhost:5173/orderSummary/de1hD06DsAe9A8EcsRw1
-
   useEffect(() => {
     const getOrderDetails = async () => {
       const docRef = doc(db, "orders", orderid); //reference of the order

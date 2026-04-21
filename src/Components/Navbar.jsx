@@ -18,6 +18,10 @@ const Navbar = () => {
   const { isDark } = useSelector((state) => state.theme);
   const userDetails = useSelector((state) => state.SignIn.user);
 
+  const data = useSelector((state) => state);
+  //get admin role
+  const isAdmin = userDetails?.role === "admin";
+
   useEffect(() => {
     const scrollHanler = () => {
       if (window.scrollY > 50) {
@@ -106,6 +110,13 @@ const Navbar = () => {
                       {userDetails.displayName}
                     </summary>
                     <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                      {isAdmin ? (
+                        <li onClick={() => navigate("/dashboard")}>
+                          <a>Admin Panel</a>
+                        </li>
+                      ) : (
+                        ""
+                      )}
                       <li onClick={handleLogout}>
                         <a>Logout</a>
                       </li>

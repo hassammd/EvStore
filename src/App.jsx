@@ -14,23 +14,31 @@ import ScrollToTop from "./Components/ScrollToTop";
 import Auth from "./Pages/Auth";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../Firebase";
+import { auth, db } from "../Firebase";
 import { useDispatch } from "react-redux";
 import { setUser } from "./Redux/AuthSlice/SignInSlice";
 import OrderSummary from "./Pages/OrderSummary";
+import { doc, getDoc } from "firebase/firestore";
+import DashBoard from "./Pages/DashBoard";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        dispatch(
-          setUser({
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-          }),
-        );
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const userFullDetails = docSnap.data();
+          dispatch(
+            setUser({
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName,
+              role: userFullDetails.role,
+            }),
+          );
+        }
       } else {
         dispatch(setUser(null));
       }
@@ -48,6 +56,7 @@ function App() {
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/orderSummary/:orderid" element={<OrderSummary />} />
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/auth" element={<Auth />} />
           <Route
             path="/category/:productName"

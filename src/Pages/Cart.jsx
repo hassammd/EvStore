@@ -296,6 +296,7 @@ const Cart = () => {
               )}
 
               {/* Right Side: Order Summary */}
+
               <div
                 className={`w-full lg:w-[30%] px-8 py-10  border-l ${isDark ? " bg-base-100 text-base border-base-100" : "text-gray-800 bg-gray-50 border-gray-100"} `}
               >
