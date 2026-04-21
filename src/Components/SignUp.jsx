@@ -50,6 +50,7 @@ const SignUp = () => {
       setPassword("");
       setConfirmPassword("");
       dispatch(signUpUser({ name, email, password }));
+
       navigate("/");
     }
   };

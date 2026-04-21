@@ -58,7 +58,7 @@ const CheckOut = ({
               </label>
               <input
                 onChange={(e) => setLastName(e.target.value)}
-                placeholder="First Name"
+                placeholder="Last Name"
                 type="text"
                 value={lastName}
                 className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
@@ -68,7 +68,7 @@ const CheckOut = ({
             <div className="w-[31.7%]">
               <label htmlFor="" className="text-sm mb-1 block">
                 Email*
-              </label>{" "}
+              </label>
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="example@mail.com"
@@ -77,6 +77,9 @@ const CheckOut = ({
                 className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
               <span className="text-[12px] text-red-600">{error.email}</span>
+              <span className="text-[12px] text-red-600">
+                {error.RegexEmail}
+              </span>
             </div>
             <div className="w-[31.7%]">
               <label htmlFor="" className="text-sm mb-1 block">
@@ -86,7 +89,7 @@ const CheckOut = ({
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="0300 1234567"
                 value={phone}
-                type="text"
+                type="number"
                 className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
               <span className="text-[12px] text-red-600">{error.phone}</span>
@@ -97,7 +100,7 @@ const CheckOut = ({
               </label>
               <input
                 onChange={(e) => setCity(e.target.value)}
-                placeholder="First Name"
+                placeholder="City"
                 value={city}
                 type="text"
                 className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
@@ -111,7 +114,7 @@ const CheckOut = ({
               <input
                 onChange={(e) => setHouse(e.target.value)}
                 value={house}
-                placeholder="First Name"
+                placeholder="House No"
                 type="text"
                 className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
               />
@@ -123,7 +126,7 @@ const CheckOut = ({
               </label>
               <input
                 onChange={(e) => setLandmark(e.target.value)}
-                placeholder="First Name"
+                placeholder="Landmark"
                 type="text"
                 className="text-sm w-full border-gray-200 border px-2 py-1 rounded-sm"
               />

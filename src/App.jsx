@@ -17,6 +17,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Firebase";
 import { useDispatch } from "react-redux";
 import { setUser } from "./Redux/AuthSlice/SignInSlice";
+import OrderSummary from "./Pages/OrderSummary";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
           <Route path="/thankyou" element={<ThankYou />} />
+          <Route path="/orderSummary/:orderid" element={<OrderSummary />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/auth" element={<Auth />} />
           <Route

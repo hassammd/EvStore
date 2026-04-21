@@ -15,7 +15,9 @@ const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { isDark } = useSelector((state) => state.theme);
-  const userInfo = useSelector((state) => state.SignIn.user);
+  const userDetails = useSelector((state) => state.SignIn.user);
+
+  console.log("this is userinfo", userDetails);
 
   useEffect(() => {
     const scrollHanler = () => {
@@ -99,10 +101,10 @@ const Navbar = () => {
             </div>
             <div className=" flex items-center gap-8 ">
               <div className="flex items-center gap-3">
-                {userInfo ? (
+                {userDetails?.displayName ? (
                   <details className="dropdown">
                     <summary className="btn m-0 bg-transparent border-0 shadow-none">
-                      {userInfo.displayName}
+                      {userDetails.displayName}
                     </summary>
                     <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                       <li>

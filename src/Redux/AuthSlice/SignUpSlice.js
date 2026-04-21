@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 import { auth, db } from "../../../Firebase";
-import { doc, setDoc } from "firebase/firestore/lite";
+import { doc, setDoc } from "firebase/firestore";
 
 const initialState = {
   user: null,
@@ -20,6 +20,9 @@ const signUpUser = createAsyncThunk(
         password,
       );
       const user = userCredential.user;
+      await updateProfile(user, {
+        displayName: name,
+      });
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         name: name,
@@ -40,7 +43,7 @@ const signUpUser = createAsyncThunk(
 );
 
 const SignUpSlice = createSlice({
-  name: "SignIn",
+  name: "SignUp",
   initialState,
   extraReducers: (builder) => {
     builder.addCase(signUpUser.pending, (state, action) => {

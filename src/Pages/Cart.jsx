@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiShoppingCart } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import {
+  clearCart,
   decreaseQty,
   increaseQty,
   removeItem,
@@ -72,8 +73,11 @@ const Cart = () => {
     if (!lastName.trim()) {
       newError.lastName = "Enter Your Last Name";
     }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+/;
     if (!email.trim()) {
       newError.email = "Enter your Email";
+    } else if (!emailRegex.test(email)) {
+      newError.RegexEmail = "Enter valid email";
     }
     if (!phone.trim()) {
       newError.phone = "Enter your Number";
@@ -119,6 +123,9 @@ const Cart = () => {
         // sav data at firestore
         const docRef = await addDoc(collection(db, "orders"), orderData);
         alert("Order Confirmed! Your Order ID is: " + docRef.id);
+        navigate(`/orderSummary/${docRef.id}`);
+
+        dispatch(clearCart());
       } catch (err) {
         console.log("this is order error", err);
         // alert("Kuch masla hua hai, dobara koshish karein.");
@@ -287,7 +294,6 @@ const Cart = () => {
                   error={error}
                 />
               )}
-              {/*  */}
 
               {/* Right Side: Order Summary */}
               <div
@@ -345,7 +351,11 @@ const Cart = () => {
 
                 <div className="border-t mt-8 pt-8">
                   <div className="flex font-bold justify-between text-lg uppercase text-gray-900">
-                    <span>Total cost</span>
+                    <span
+                      className={`${isDark ? "text-base" : "text-gray-800"}`}
+                    >
+                      Total cost
+                    </span>
                     <span>${totalCost.toFixed(2)}</span>
                   </div>
                   {!isCheckOut ? (
