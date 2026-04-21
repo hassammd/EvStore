@@ -83,7 +83,7 @@ const OrderSummary = () => {
           <div className="mt-10 flex gap-4 justify-center">
             <a
               href="/products"
-              className="btn btn-primary bg-orange border-none"
+              className="btn btn-primary shadow-none text-base-100 bg-orange border-none"
             >
               Continue Shopping
             </a>

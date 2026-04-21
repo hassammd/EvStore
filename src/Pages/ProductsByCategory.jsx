@@ -55,7 +55,7 @@ const ProductsByCategory = () => {
             Explore {productName}
           </h2>
 
-          <div className={` flex gap-7 justify-between`}>
+          <div className={` flex gap-7`}>
             {/* black overlay */}
             <div
               onClick={() => {
@@ -74,7 +74,7 @@ const ProductsByCategory = () => {
   ${isActiveFilterBar ? "left-0 opacity-100" : "-left-full lg:left-0 opacity-0 lg:opacity-100"} 
 
   /* Desktop: Sticky Sidebar Logic */
-  lg:sticky lg:top-[80px] lg:block lg:w-[20%] lg:h-[calc(100vh-80px)]
+  lg:sticky lg:top-[80px] lg:block lg:w-[25%] lg:h-[calc(100vh-80px)]
   
   /* Styling & Scroll */
   overflow-y-auto shadow-xl lg:shadow-none
@@ -132,7 +132,7 @@ const ProductsByCategory = () => {
             </div>
 
             {/* right side */}
-            <div className=" lg:w-[80%] flex flex-col flex-wrap gap-7">
+            <div className=" lg:w-[70%] flex flex-col flex-wrap gap-7">
               <div className="flex justify-between">
                 {/* grid view */}
                 <div class="flex gap-3.5 justify-between">
@@ -217,7 +217,7 @@ const ProductsByCategory = () => {
                   return (
                     <>
                       <div
-                        className={` flex ${isGridView ? "lg:w-[23%]" : "lg:w-full"} group relative flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border  rounded-lg ${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"}  w-full sm:w-[45%] md:w-[30%]  lg:p-8 cursor-pointer hover:shadow-md`}
+                        className={` flex ${isGridView ? "lg:w-[23%]" : "lg:w-full"} group relative flex-col items-center justify-center gap-4 p-4 transition-all duration-300 border  rounded-lg ${isDark ? "bg-base-200 border-base-200" : "bg-gray-50 border-gray-200"}  w-full sm:w-[45%] md:w-[30%] lg:w-[30.5%] xl:w-[23%] lg:p-8 cursor-pointer hover:shadow-md`}
                       >
                         <div className="hidden lg:flex flex-col items-center justify-center absolute inset-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300 bg-orange">
                           <span

@@ -166,7 +166,7 @@ const Cart = () => {
               {!isCheckOut ? (
                 //Left Side: Product List
                 <div
-                  className={`w-full lg:w-3/4 ${isDark ? "bg-base-200 text-base " : "bg-white"}  px-6 md:px-10 py-10`}
+                  className={`w-full lg:w-[70%] ${isDark ? "bg-base-200 text-base " : "bg-white"}  px-6 md:px-10 py-10`}
                 >
                   <div className="flex justify-between border-b lg:pb-8 pb-4">
                     <h1
@@ -297,7 +297,7 @@ const Cart = () => {
 
               {/* Right Side: Order Summary */}
               <div
-                className={`w-full lg:w-1/4 px-8 py-10  border-l ${isDark ? " bg-base-100 text-base border-base-100" : "text-gray-800 bg-gray-50 border-gray-100"} `}
+                className={`w-full lg:w-[30%] px-8 py-10  border-l ${isDark ? " bg-base-100 text-base border-base-100" : "text-gray-800 bg-gray-50 border-gray-100"} `}
               >
                 <h2
                   className={`${isDark ? " text-base" : "text-gray-800"} font-bold text-2xl border-b pb-8 `}

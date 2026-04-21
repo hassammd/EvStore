@@ -61,9 +61,9 @@ select {
       @apply text-lg;
     }
     /* Desktop (lg) */
-    @media (width>=theme(--breakpoint-lg)) {
+    /* @media (width>=theme(--breakpoint-lg)) {
       @apply text-xl;
-    }
+    } */
   }
 }
 

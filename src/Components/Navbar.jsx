@@ -106,12 +106,6 @@ const Navbar = () => {
                       {userDetails.displayName}
                     </summary>
                     <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                      <li>
-                        <a>My Orders</a>
-                      </li>
-                      <li>
-                        <a>Profile</a>
-                      </li>
                       <li onClick={handleLogout}>
                         <a>Logout</a>
                       </li>
