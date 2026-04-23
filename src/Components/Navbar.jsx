@@ -3,6 +3,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { LuUser } from "react-icons/lu";
 import Theme from "./Theme";
 
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
@@ -103,45 +104,51 @@ const Navbar = () => {
               </ul>
             </div>
             <div className=" flex items-center gap-8 ">
-              <div className="flex items-center gap-3">
-                {userDetails?.displayName ? (
-                  <details className="dropdown">
-                    <summary className="btn m-0 bg-transparent border-0 shadow-none">
-                      {userDetails.displayName}
-                    </summary>
-                    <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                      {isAdmin ? (
-                        <li onClick={() => navigate("/dashboard")}>
-                          <a>Admin Panel</a>
-                        </li>
-                      ) : (
-                        ""
-                      )}
-                      <li onClick={handleLogout}>
-                        <a>Logout</a>
-                      </li>
-                    </ul>
-                  </details>
-                ) : (
-                  <FaRegUser
-                    onClick={() => navigate("/auth")}
-                    className="lg:text-2xl text-[25px] cursor-pointer hover:text-orange transition-all ease-in-out duration-200"
-                  />
-                )}
+              <div className="flex items-center gap-8">
+                <div className="flex items-center gap-2.5">
+                  <div>
+                    {userDetails?.displayName ? (
+                      <details className="dropdown ">
+                        <summary className="btn m-0 bg-transparent shadow-none">
+                          <LuUser className="text-lg" />
+                        </summary>
+                        <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                          <li>
+                            <a> {userDetails.displayName}</a>
+                          </li>
+                          {isAdmin ? (
+                            <li onClick={() => navigate("/dashboard")}>
+                              <a>Admin Panel</a>
+                            </li>
+                          ) : (
+                            ""
+                          )}
+                          <li onClick={handleLogout}>
+                            <a>Logout</a>
+                          </li>
+                        </ul>
+                      </details>
+                    ) : (
+                      <FaRegUser
+                        onClick={() => navigate("/auth")}
+                        className="lg:text-2xl text-[25px] cursor-pointer hover:text-orange transition-all ease-in-out duration-200"
+                      />
+                    )}
+                  </div>
+                  <div>
+                    <Theme />
+                  </div>
 
-                <div>
-                  <Theme />
-                </div>
+                  <div
+                    onClick={() => navigate("/cart")}
+                    className="relative cursor-pointer"
+                  >
+                    <PiShoppingCartSimpleBold className="lg:text-2xl text-[25px] hover:text-orange transition-all ease-in-out duration-200" />
 
-                <div
-                  onClick={() => navigate("/cart")}
-                  className="relative cursor-pointer"
-                >
-                  <PiShoppingCartSimpleBold className="lg:text-2xl text-[25px] hover:text-orange transition-all ease-in-out duration-200" />
-
-                  <span className="absolute top-[-10px] right-[-17px] text-white flex items-center justify-center bg-orange rounded-2xl h-6 w-6">
-                    {quantityCount}
-                  </span>
+                    <span className="absolute top-[-10px] right-[-17px] text-white flex items-center justify-center bg-orange rounded-2xl h-6 w-6">
+                      {quantityCount}
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="lg:hidden flex flex-row gap-2 ">

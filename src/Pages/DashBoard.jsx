@@ -9,12 +9,14 @@ import OrderDetailsBox from "../Components/OrderDetailsBox";
 import { FaDollarSign } from "react-icons/fa6";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { current } from "@reduxjs/toolkit";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const DashBoard = () => {
   const [order, setOrder] = useState([]);
   const [loading, setLoading] = useState();
   const [isActiveBox, setIsActiveBox] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState();
+  const [isSideBarActive, setIsSideBarActive] = useState(false);
   console.log("orders", order);
 
   // firestore order fetching function
@@ -61,7 +63,26 @@ const DashBoard = () => {
 
       <div className="flex">
         {/* left side bar */}
-        <div className="w-[12%] p-6 h-screen bg-[#1E293B] flex flex-col gap-8">
+
+        {isSideBarActive ? (
+          <div
+            onClick={() => setIsSideBarActive(false)}
+            className="fixed inset-0 bg-black/50"
+          ></div>
+        ) : (
+          ""
+        )}
+
+        <div
+          className={`
+  ${isSideBarActive ? "left-0" : "-left-full lg:left-0"} 
+  fixed lg:sticky top-0 z-50 
+  h-screen w-[70%] lg:w-[12%] 
+  p-6 bg-[#1E293B] 
+  flex flex-col gap-8 
+  transition-all duration-600 ease-in-out
+`}
+        >
           <div className="">
             <h3 className="text-white text-2xl">EvStore Admin</h3>
           </div>
@@ -104,51 +125,60 @@ const DashBoard = () => {
         </div>
 
         {/* righ side bar */}
-        <div className="w-[85%] flex flex-col gap-12   shadow-sm px-8">
-          <div className="py-4 bg-gray-100 flex items-center justify-between">
-            <h3 className="font-bold">Order Management</h3>
-
-            <span>Admin</span>
+        <div className="w-full lg:w-[85%] flex flex-col gap-12   shadow-sm  ">
+          <div className="py-4 px-5 bg-gray-100 flex items-center justify-between">
+            <span
+              className="lg:hidden"
+              onClick={() => setIsSideBarActive(true)}
+            >
+              <RxHamburgerMenu />
+            </span>
+            <h3 className="text-[14px] font-bold text-center">
+              Order Management
+            </h3>
+            <span className="text-[14px]">Admin</span>
           </div>
-          <div>
-            <span className="text-2xl font-semibold block mb-4">
+          <div className="px-4">
+            <span className="lg:text-2xl text-lg font-semibold block mb-4">
               Stats Overview
             </span>
-            <div className="flex justify-between">
-              <div className="shadow-lg rounded-xl w-[30%] p-8 bg-[#E0F2FE]">
+            <div className="flex flex-col gap-4 justify-between">
+              <div className="shadow-lg rounded-xl lg:w-[30%] lg:p-8 p-5 bg-[#E0F2FE]">
                 <div className="flex items-center justify-between gap-2.5">
                   <div>
                     <span>Total Orders</span>
-                    <span className="text-4xl block">
+                    <span className="lg:text-4xl text-2xl block">
                       {order ? order.length : ""}
                     </span>
                   </div>
-                  <div className="bg-[#0EA5E9] p-4 rounded-2xl">
-                    <HiOutlineShoppingBag className="text-3xl text-white" />
+                  <div className="bg-[#0EA5E9] lg:p-4 p-2.5 rounded-lg">
+                    <HiOutlineShoppingBag className="lg:text-3xl text-lg text-white" />
                   </div>
                 </div>
               </div>
-              <div className="shadow-lg rounded-xl w-[30%] p-8 bg-[#FEF3C7]">
+              <div className="shadow-lg rounded-xl lg:w-[30%] lg:p-8 p-5 bg-[#FEF3C7]">
                 <div className="flex items-center justify-between gap-2.5">
                   <div>
                     <span>Pending Orders</span>
-                    <span className="text-4xl block">{pendingOrders}</span>
+                    <span className="lg:text-4xl text-2xl block">
+                      {pendingOrders}
+                    </span>
                   </div>
-                  <div className="bg-[#F59E0B] p-4 rounded-2xl">
-                    <MdAccessTime className="text-3xl text-white" />
+                  <div className="bg-[#F59E0B] lg:p-4 p-2.5 rounded-lg">
+                    <MdAccessTime className="lg:text-3xl text-lg text-white" />
                   </div>
                 </div>
               </div>
-              <div className="shadow-lg rounded-xl  w-[30%] p-8 bg-[#DCFCE7]">
+              <div className="shadow-lg rounded-xl  lg:w-[30%] lg:p-8 p-5 bg-[#DCFCE7]">
                 <div className="flex items-center justify-between gap-2.5">
                   <div>
                     <span>Total Revenue</span>
-                    <span className="text-4xl block">
+                    <span className="lg:text-4xl text-2xl block">
                       ${totalRevenue.toLocaleString()}
                     </span>
                   </div>
-                  <div className="bg-[#22C55E] p-4 rounded-2xl">
-                    <FaDollarSign className="text-3xl text-white" />
+                  <div className="bg-[#22C55E] lg:p-4 p-2.5 rounded-lg">
+                    <FaDollarSign className="lg:text-3xl text-lg text-white" />
                   </div>
                 </div>
               </div>
@@ -159,7 +189,7 @@ const DashBoard = () => {
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
             {/* Table Header Section */}
             <div className="p-6 bg-[#1E293B] flex justify-between items-center">
-              <h4 className="text-xl font-bold text-white tracking-wide">
+              <h4 className="lg:text-xl text-lg font-bold text-white tracking-wide">
                 Orders Management
               </h4>
               <div className="flex gap-2">
