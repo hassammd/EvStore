@@ -131,7 +131,7 @@ const DashBoard = () => {
               className="lg:hidden"
               onClick={() => setIsSideBarActive(true)}
             >
-              <RxHamburgerMenu />
+              <RxHamburgerMenu className="text-xl" />
             </span>
             <h3 className="text-[14px] font-bold text-center">
               Order Management
@@ -186,10 +186,10 @@ const DashBoard = () => {
           </div>
           {/* table */}
           {/* Table Container - Deep Contrast Style */}
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+          <div className="mx-4 bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
             {/* Table Header Section */}
-            <div className="p-6 bg-[#1E293B] flex justify-between items-center">
-              <h4 className="lg:text-xl text-lg font-bold text-white tracking-wide">
+            <div className="lg:p-6 p-4 bg-[#1E293B] flex justify-between items-center">
+              <h4 className="lg:text-xl text-sm font-bold text-white tracking-wide">
                 Orders Management
               </h4>
               <div className="flex gap-2">
