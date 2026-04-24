@@ -67,7 +67,7 @@ const DashBoard = () => {
         {isSideBarActive ? (
           <div
             onClick={() => setIsSideBarActive(false)}
-            className="fixed inset-0 bg-black/50"
+            className="lg:hidden fixed inset-0 bg-black/50"
           ></div>
         ) : (
           ""
@@ -77,14 +77,14 @@ const DashBoard = () => {
           className={`
   ${isSideBarActive ? "left-0" : "-left-full lg:left-0"} 
   fixed lg:sticky top-0 z-50 
-  h-screen w-[70%] lg:w-[12%] 
+  h-screen w-[70%] lg:w-[20%] xl:w-[12%] 
   p-6 bg-[#1E293B] 
   flex flex-col gap-8 
   transition-all duration-600 ease-in-out
 `}
         >
           <div className="">
-            <h3 className="text-white text-2xl">EvStore Admin</h3>
+            <h3 className="text-white  text-xl">EvStore Admin</h3>
           </div>
           <div>
             <ul className="flex flex-col gap-2.5">
@@ -125,7 +125,7 @@ const DashBoard = () => {
         </div>
 
         {/* righ side bar */}
-        <div className="w-full lg:w-[85%] flex flex-col gap-12   shadow-sm  ">
+        <div className="w-full lg:w-[80%] xl:w-[90%] flex flex-col gap-12   shadow-sm  ">
           <div className="py-4 px-5 bg-gray-100 flex items-center justify-between">
             <span
               className="lg:hidden"
@@ -133,52 +133,54 @@ const DashBoard = () => {
             >
               <RxHamburgerMenu className="text-xl" />
             </span>
-            <h3 className="text-[14px] font-bold text-center">
+            <h3 className="text-[14px] font-semibold text-center">
               Order Management
             </h3>
             <span className="text-[14px]">Admin</span>
           </div>
+
+          {/* stats */}
           <div className="px-4">
             <span className="lg:text-2xl text-lg font-semibold block mb-4">
               Stats Overview
             </span>
-            <div className="flex flex-col gap-4 justify-between">
-              <div className="shadow-lg rounded-xl lg:w-[30%] lg:p-8 p-5 bg-[#E0F2FE]">
+            <div className="flex  flex-wrap gap-4  justify-between">
+              <div className="shadow-lg rounded-xl w-full sm:w-[30%] flex justify-between flex-col lg:w-[30%] lg:p-5 xl:p-10 p-5 bg-[#E0F2FE]">
                 <div className="flex items-center justify-between gap-2.5">
-                  <div>
-                    <span>Total Orders</span>
+                  <div className="flex flex-col gap-1.5">
+                    <span className="xl:text-xl ">Total Orders</span>
                     <span className="lg:text-4xl text-2xl block">
                       {order ? order.length : ""}
                     </span>
                   </div>
-                  <div className="bg-[#0EA5E9] lg:p-4 p-2.5 rounded-lg">
-                    <HiOutlineShoppingBag className="lg:text-3xl text-lg text-white" />
+                  <div className="bg-[#0EA5E9] lg:p-2 xl:p-4 p-2.5 rounded-lg">
+                    <HiOutlineShoppingBag className="lg:text-2xl xl:text-3xl text-lg text-white" />
                   </div>
                 </div>
               </div>
-              <div className="shadow-lg rounded-xl lg:w-[30%] lg:p-8 p-5 bg-[#FEF3C7]">
+              <div className="shadow-lg rounded-xl w-full sm:w-[30%] flex justify-between flex-col items-centers lg:w-[30%] lg:p-5 xl:p-10 p-5 bg-[#FEF3C7]">
                 <div className="flex items-center justify-between gap-2.5">
-                  <div>
-                    <span>Pending Orders</span>
+                  <div className="flex flex-col gap-1.5">
+                    <span className="xl:text-xl ">Pending Orders</span>
                     <span className="lg:text-4xl text-2xl block">
                       {pendingOrders}
                     </span>
                   </div>
-                  <div className="bg-[#F59E0B] lg:p-4 p-2.5 rounded-lg">
-                    <MdAccessTime className="lg:text-3xl text-lg text-white" />
+                  <div className="bg-[#F59E0B] xl:p-4 lg:p-2 p-2.5 rounded-lg">
+                    <MdAccessTime className="lg:text-2xl xl:text-3xl text-lg text-white" />
                   </div>
                 </div>
               </div>
-              <div className="shadow-lg rounded-xl  lg:w-[30%] lg:p-8 p-5 bg-[#DCFCE7]">
+              <div className="shadow-lg rounded-xl w-full sm:w-[30%]  lg:w-[30%] lg:p-5 xl:p-10 p-5 bg-[#DCFCE7]">
                 <div className="flex items-center justify-between gap-2.5">
-                  <div>
-                    <span>Total Revenue</span>
-                    <span className="lg:text-4xl text-2xl block">
+                  <div className="flex flex-col gap-1.5">
+                    <span className="xl:text-xl ">Total Revenue</span>
+                    <span className="lg:text-3xl text-2xl block">
                       ${totalRevenue.toLocaleString()}
                     </span>
                   </div>
-                  <div className="bg-[#22C55E] lg:p-4 p-2.5 rounded-lg">
-                    <FaDollarSign className="lg:text-3xl text-lg text-white" />
+                  <div className="bg-[#22C55E] lg:p-2 xl:p-4 p-2.5 rounded-lg">
+                    <FaDollarSign className="lg:text-2xl xl:text-3xl text-lg text-white" />
                   </div>
                 </div>
               </div>
@@ -189,7 +191,7 @@ const DashBoard = () => {
           <div className="mx-4 bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
             {/* Table Header Section */}
             <div className="lg:p-6 p-4 bg-[#1E293B] flex justify-between items-center">
-              <h4 className="lg:text-xl text-sm font-bold text-white tracking-wide">
+              <h4 className="lg:text-xl text-sm font-semibold text-white tracking-wide">
                 Orders Management
               </h4>
               <div className="flex gap-2">
@@ -250,9 +252,9 @@ const DashBoard = () => {
                       </td>
                       <td className="px-6 py-4 text-center">
                         <span
-                          className={`inline-block w-24 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest shadow-sm border ${
+                          className={`inline-block w-24 py-1.5 rounded-lg text-[10px] uppercase tracking-widest shadow-sm border ${
                             items.orderStatus === "pending"
-                              ? "bg-[#F59E0B] text-amber-400 border-amber-400"
+                              ? "bg-orange-50 text-orange-600 border-amber-400"
                               : "bg-emerald-50 text-emerald-600 border-emerald-200"
                           }`}
                         >
