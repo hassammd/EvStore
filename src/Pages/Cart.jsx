@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { FiShoppingCart } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   clearCart,
   decreaseQty,
@@ -150,6 +150,43 @@ const Cart = () => {
       <div className="py-[100px]">
         {cart.length > 0 ? (
           <div className="container mx-auto mt-10 lg:p-6 p-4">
+            <div className="breadcrumbs text-sm mb-6">
+              <ul
+                className={`flex gap-2 ${isDark ? "text-gray-400" : "text-gray-500"}`}
+              >
+                <li>
+                  <Link
+                    to="/"
+                    className="hover:text-orange-500 transition-colors"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li className="before:content-['>'] before:mr-2">
+                  {isCheckOut ? (
+                    <button
+                      onClick={() => setIsCheckOut(false)}
+                      className="hover:text-orange-500 cursor-pointer"
+                    >
+                      Shopping Cart
+                    </button>
+                  ) : (
+                    <span
+                      className={
+                        isDark ? "text-white" : "text-gray-800 font-bold"
+                      }
+                    >
+                      Shopping Cart
+                    </span>
+                  )}
+                </li>
+                {isCheckOut && (
+                  <li className="before:content-['>'] before:mr-2 font-bold text-orange-500">
+                    Checkout
+                  </li>
+                )}
+              </ul>
+            </div>
             <div
               className={`flex flex-col lg:flex-row shadow-lg bg-white rounded-lg overflow-hidden border ${isDark ? " border-base-100" : " border-gray-100"}`}
             >
@@ -359,9 +396,7 @@ const Cart = () => {
                   </div>
                 </div>
               ) : (
-                <div className="w-1/2 flex  items-center justify-center">
-                  <img src={shippingimg} alt="" />
-                </div>
+                ""
               )}
             </div>
           </div>

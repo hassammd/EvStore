@@ -27,13 +27,13 @@ const Hero = ({ data }) => {
   } = data;
   return (
     <>
-      <div className={`${isDark ? "bg-base-200" : "bg-[#E0F2FE]"}  `}>
+      <div className={`${isDark ? "bg-base-200" : "bg-gray-50"}  `}>
         <Navbar />
         <div className="container mx-auto px-10">
           <div className=" pt-[110px] pb-[80px] flex flex-col-reverse lg:flex-row justify-between gap-8 items-center">
             {/* Text Column: Mobile par Center, Desktop par Left */}
             <div className="lg:w-1/2 w-full flex flex-col items-center lg:items-start text-center lg:text-left gap-5">
-              <span className="text-blue-500 text-lg font-medium">
+              <span className="text-orange text-lg font-medium">
                 {subHeading}
               </span>
 

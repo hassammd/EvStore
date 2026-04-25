@@ -26,7 +26,7 @@ const CheckOut = ({
 }) => {
   return (
     <>
-      <div className="w-full  lg:w-[70%] bg-white px-6 md:px-10 py-10">
+      <div className="w-full  lg:w-full bg-white px-6 md:px-10 py-10">
         <div className="flex justify-between border-b lg:pb-8 pb-4">
           <h1 className="font-bold text-[14px] lg:text-2xl text-gray-800">
             Shipping Details
@@ -167,12 +167,14 @@ const CheckOut = ({
                 name=""
                 id=""
               ></textarea>
-              <button
-                onClick={handleForm}
-                className="bg-orange font-bold cursor-pointer py-4 mt-6 text-sm text-white uppercase w-full rounded shadow-lg transition-all active:scale-[0.98]"
-              >
-                Confirm Order
-              </button>
+              <div className=" ">
+                <button
+                  onClick={handleForm}
+                  className=" bg-orange font-bold cursor-pointer py-4 mt-6 text-sm text-white uppercase w-full rounded shadow-lg transition-all active:scale-[0.98]"
+                >
+                  Confirm Order
+                </button>
+              </div>
             </div>
           </form>
         </div>
