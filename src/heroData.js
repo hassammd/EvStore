@@ -22,7 +22,7 @@ export const heroData = {
       "We are committed to bringing you the finest selection of global brands with a seamless shopping experience.",
     primaryBtn: "Read More",
     secondaryBtn: "Our Team",
-    image: bannerimage,
+    image: aboutus,
   },
   products: {
     subHeading: "Exclusive Collection",
@@ -31,7 +31,7 @@ export const heroData = {
       "Browse through our wide range of premium products designed to elevate your lifestyle.",
     primaryBtn: "View All",
     secondaryBtn: "Top Rated",
-    image: bannerimage,
+    image: productsImage,
   },
   contact: {
     subHeading: "Get In Touch",
@@ -40,7 +40,7 @@ export const heroData = {
       "Have questions? Our support team is available 24/7 to assist you with your orders and inquiries.",
     primaryBtn: "Contact Us",
     secondaryBtn: "FAQs",
-    image: bannerimage,
+    image: contactImage,
   },
   cart: {
     subHeading: "Your Selections",
@@ -49,7 +49,7 @@ export const heroData = {
       "Review your items and apply any available coupons for extra discounts.",
     primaryBtn: "Checkout Now",
     secondaryBtn: "Back to Shop",
-    image: bannerimage,
+    image: cartImage,
   },
   productsByCategory: {
     subHeading: "Your Selections",
@@ -58,6 +58,6 @@ export const heroData = {
       "Review your items and apply any available coupons for extra discounts.",
     primaryBtn: "Checkout Now",
     secondaryBtn: "Back to Shop",
-    image: bannerimage,
+    image: cartImage,
   },
 };

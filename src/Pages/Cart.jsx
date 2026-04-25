@@ -13,6 +13,7 @@ import Navbar from "../Components/Navbar";
 import CheckOut from "../Components/CheckOut";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
+import shippingimg from "../assets/images/shippingimg.png";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -149,17 +150,6 @@ const Cart = () => {
       <div className="py-[100px]">
         {cart.length > 0 ? (
           <div className="container mx-auto mt-10 lg:p-6 p-4">
-            <div className="breadcrumbs text-sm">
-              <ul>
-                <li>
-                  <a>Cart</a>
-                </li>
-                <li>
-                  <a>Shipping</a>
-                </li>
-                <li>Payment</li>
-              </ul>
-            </div>
             <div
               className={`flex flex-col lg:flex-row shadow-lg bg-white rounded-lg overflow-hidden border ${isDark ? " border-base-100" : " border-gray-100"}`}
             >
@@ -271,6 +261,7 @@ const Cart = () => {
               ) : (
                 //left side checkout section
                 <CheckOut
+                  handleForm={handleForm}
                   firstName={firstName}
                   setFirstName={setFirstName}
                   lastName={lastName}
@@ -296,86 +287,82 @@ const Cart = () => {
               )}
 
               {/* Right Side: Order Summary */}
-
-              <div
-                className={`w-full lg:w-[30%] px-8 py-10  border-l ${isDark ? " bg-base-100 text-base border-base-100" : "text-gray-800 bg-gray-50 border-gray-100"} `}
-              >
-                <h2
-                  className={`${isDark ? " text-base" : "text-gray-800"} font-bold text-2xl border-b pb-8 `}
-                >
-                  Order Summary
-                </h2>
-
+              {!isCheckOut ? (
                 <div
-                  className={`flex justify-between mt-10 mb-5 uppercase text-sm font-bold ${isDark ? "border-gray text-base" : "text-gray-800"}`}
+                  className={`w-full lg:w-[30%] px-8 py-10  border-l ${isDark ? " bg-base-100 text-base border-base-100" : "text-gray-800 bg-gray-50 border-gray-100"} `}
                 >
-                  <span>Items ({cartCount})</span>
-                  <span>${subTotal.toFixed(2)}</span>
-                </div>
+                  <h2
+                    className={`${isDark ? " text-base" : "text-gray-800"} font-bold text-2xl border-b pb-8 `}
+                  >
+                    Order Summary
+                  </h2>
 
-                <div className="mb-6">
-                  <label
-                    className={`"font-semibold inline-block mb-3 text-sm uppercase ${isDark ? "border-gray text-base" : "text-gray-800"}`}
+                  <div
+                    className={`flex justify-between mt-10 mb-5 uppercase text-sm font-bold ${isDark ? "border-gray text-base" : "text-gray-800"}`}
                   >
-                    Shipping
-                  </label>
-                  <select
-                    onChange={(e) => setShipping(Number(e.target.value))}
-                    className="lg:text-sm text-[12px] block p-3 border border-gray-300 text-gray-700 w-full text-sm outline-none rounded bg-white focus:border-orange-400"
-                  >
-                    <option value="10">Standard shipping - $10.00</option>
-                    <option value="25">Express shipping - $25.00</option>
-                  </select>
-                </div>
-
-                <div className="py-4 border-t border-gray-200">
-                  <label
-                    className={`font-bold inline-block mb-3 text-sm uppercase ${isDark ? "border-gray text-base" : "text-gray-800"}`}
-                  >
-                    Promo Code
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      onChange={(e) => setPromoCode(e.target.value)}
-                      type="text"
-                      placeholder="Enter SAVE10"
-                      className={`${isInvalidPromo && "border-red-600"} p-3 lg:text-sm text-[12px] w-full rounded border border-gray-300 outline-none focus:border-orange-400`}
-                    />
-                    <button
-                      onClick={promoHandler}
-                      className="bg-gray-800 cursor-pointer text-white px-4 py-2 rounded text-xs font-bold hover:bg-black transition-colors"
-                    >
-                      Apply
-                    </button>
+                    <span>Items ({cartCount})</span>
+                    <span>${subTotal.toFixed(2)}</span>
                   </div>
-                </div>
 
-                <div className="border-t mt-8 pt-8">
-                  <div className="flex font-bold justify-between text-lg uppercase text-gray-900">
-                    <span
-                      className={`${isDark ? "text-base" : "text-gray-800"}`}
+                  <div className="mb-6">
+                    <label
+                      className={`"font-semibold inline-block mb-3 text-sm uppercase ${isDark ? "border-gray text-base" : "text-gray-800"}`}
                     >
-                      Total cost
-                    </span>
-                    <span>${totalCost.toFixed(2)}</span>
+                      Shipping
+                    </label>
+                    <select
+                      onChange={(e) => setShipping(Number(e.target.value))}
+                      className="lg:text-sm text-[12px] block p-3 border border-gray-300 text-gray-700 w-full text-sm outline-none rounded bg-white focus:border-orange-400"
+                    >
+                      <option value="10">Standard shipping - $10.00</option>
+                      <option value="25">Express shipping - $25.00</option>
+                    </select>
                   </div>
-                  {!isCheckOut ? (
+
+                  <div className="py-4 border-t border-gray-200">
+                    <label
+                      className={`font-bold inline-block mb-3 text-sm uppercase ${isDark ? "border-gray text-base" : "text-gray-800"}`}
+                    >
+                      Promo Code
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        onChange={(e) => setPromoCode(e.target.value)}
+                        type="text"
+                        placeholder="Enter SAVE10"
+                        className={`${isInvalidPromo && "border-red-600"} p-3 lg:text-sm text-[12px] w-full rounded border border-gray-300 outline-none focus:border-orange-400`}
+                      />
+                      <button
+                        onClick={promoHandler}
+                        className="bg-gray-800 cursor-pointer text-white px-4 py-2 rounded text-xs font-bold hover:bg-black transition-colors"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="border-t mt-8 pt-8">
+                    <div className="flex font-bold justify-between text-lg uppercase text-gray-900">
+                      <span
+                        className={`${isDark ? "text-base" : "text-gray-800"}`}
+                      >
+                        Total cost
+                      </span>
+                      <span>${totalCost.toFixed(2)}</span>
+                    </div>
                     <button
                       onClick={() => setIsCheckOut(true)}
                       className="bg-orange font-bold cursor-pointer py-4 mt-6 text-sm text-white uppercase w-full rounded shadow-lg transition-all active:scale-[0.98]"
                     >
                       Proceed to Checkout
                     </button>
-                  ) : (
-                    <button
-                      onClick={handleForm}
-                      className="bg-orange font-bold cursor-pointer py-4 mt-6 text-sm text-white uppercase w-full rounded shadow-lg transition-all active:scale-[0.98]"
-                    >
-                      Confirm Order
-                    </button>
-                  )}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="w-1/2 flex  items-center justify-center">
+                  <img src={shippingimg} alt="" />
+                </div>
+              )}
             </div>
           </div>
         ) : (

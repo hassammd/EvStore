@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const CheckOut = ({
+  handleForm,
   firstName,
   setFirstName,
   lastName,
@@ -166,6 +167,12 @@ const CheckOut = ({
                 name=""
                 id=""
               ></textarea>
+              <button
+                onClick={handleForm}
+                className="bg-orange font-bold cursor-pointer py-4 mt-6 text-sm text-white uppercase w-full rounded shadow-lg transition-all active:scale-[0.98]"
+              >
+                Confirm Order
+              </button>
             </div>
           </form>
         </div>
