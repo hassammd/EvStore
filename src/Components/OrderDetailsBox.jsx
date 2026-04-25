@@ -1,6 +1,16 @@
+import { current } from "@reduxjs/toolkit";
 import { IoClose } from "react-icons/io5";
 
 const OrderDetailsBox = ({ setIsActiveBox, selectedOrder }) => {
+  console.log("this is from box", selectedOrder);
+
+  //Total Amoutn payable
+
+  const totalAmount = selectedOrder.items.reduce((acc, current) => {
+    const total = acc + current.price;
+    return total;
+  }, 0);
+  console.log("this is total:", totalAmount);
   return (
     // Backdrop (Black overlay)
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[999] p-4">
@@ -74,16 +84,15 @@ const OrderDetailsBox = ({ setIsActiveBox, selectedOrder }) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="py-2 font-medium">Wireless Headphones</td>
-                    <td className="py-2 text-center">1</td>
-                    <td className="py-2 text-right">$554.95</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 font-medium">USB-C Cable</td>
-                    <td className="py-2 text-center">2</td>
-                    <td className="py-2 text-right">$24.00</td>
-                  </tr>
+                  {selectedOrder.items.map((items) => {
+                    return (
+                      <tr>
+                        <td className="py-2 font-medium">{items.title}</td>
+                        <td className="py-2 text-center">{items.quantity}</td>
+                        <td className="py-2 text-right">${items.price}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -95,7 +104,9 @@ const OrderDetailsBox = ({ setIsActiveBox, selectedOrder }) => {
           <span className="text-gray-600 font-medium">
             Total Amount Payable:
           </span>
-          <span className="text-3xl font-bold text-[#2A528A]">$578.95</span>
+          <span className="text-3xl font-bold text-[#2A528A]">
+            ${selectedOrder.totalAmount}
+          </span>
         </div>
       </div>
     </div>

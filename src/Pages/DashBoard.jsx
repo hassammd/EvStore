@@ -1,15 +1,23 @@
 import { collection, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../../Firebase";
+import { auth, db } from "../../Firebase";
 import { LuEye } from "react-icons/lu";
-import { MdAccessTime, MdOutlineDashboard } from "react-icons/md";
+import {
+  MdAccessTime,
+  MdOutlineDashboard,
+  MdOutlineLogout,
+} from "react-icons/md";
 import { IoDocumentTextOutline, IoSettingsOutline } from "react-icons/io5";
-import { FiUsers } from "react-icons/fi";
+import { FiUser, FiUsers } from "react-icons/fi";
 import OrderDetailsBox from "../Components/OrderDetailsBox";
 import { FaDollarSign } from "react-icons/fa6";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { current } from "@reduxjs/toolkit";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { signOut } from "firebase/auth";
+import { logOutUser } from "../Redux/AuthSlice/SignInSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const DashBoard = () => {
   const [order, setOrder] = useState([]);
@@ -17,7 +25,9 @@ const DashBoard = () => {
   const [isActiveBox, setIsActiveBox] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState();
   const [isSideBarActive, setIsSideBarActive] = useState(false);
-  console.log("orders", order);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // firestore order fetching function
   const fetchAllOrders = async () => {
@@ -49,6 +59,16 @@ const DashBoard = () => {
     (items) => items.orderStatus === "pending",
   ).length;
 
+  //Logout Handler
+  const LogoutHandler = async () => {
+    try {
+      await signOut(auth);
+      dispatch(logOutUser);
+      navigate("/auth");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       {isActiveBox ? (
@@ -133,10 +153,16 @@ const DashBoard = () => {
             >
               <RxHamburgerMenu className="text-xl" />
             </span>
-            <h3 className="text-[14px] font-semibold text-center">
+            <h3 className="text-[14px] xl:text-2xl  font-semibold text-center">
               Order Management
             </h3>
-            <span className="text-[14px]">Admin</span>
+
+            <span
+              onClick={LogoutHandler}
+              className="text-[14px] cursor-pointer"
+            >
+              <MdOutlineLogout className="lg:text-2xl text-[25px]" />
+            </span>
           </div>
 
           {/* stats */}
@@ -268,11 +294,11 @@ const DashBoard = () => {
                               setSelectedOrder(items);
                               setIsActiveBox(true);
                             }}
-                            className="p-2.5 bg-white border border-slate-200 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm"
+                            className="cursor-pointer p-2.5 bg-white border border-slate-200 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm"
                           >
                             <LuEye className="text-xl" />
                           </button>
-                          <button className="p-2.5 bg-white border border-slate-200 text-slate-400 rounded-xl hover:bg-slate-800 hover:text-white transition-all shadow-sm">
+                          <button className="cursor-pointer p-2.5 bg-white border border-slate-200 text-slate-400 rounded-xl hover:bg-slate-800 hover:text-white transition-all shadow-sm">
                             <IoSettingsOutline className="text-xl" />
                           </button>
                         </div>

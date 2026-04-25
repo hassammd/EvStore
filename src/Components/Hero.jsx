@@ -28,7 +28,7 @@ const Hero = ({ data }) => {
   return (
     <>
       <div
-        className={`${isDark ? "bg-base-200" : "bg-gradient-to-r from-blue-50 to-cyan-50"}  md:pb-[90px] lg:pb-[100px]`}
+        className={`${isDark ? "bg-base-200" : "bg-gradient-to-r from-fuchsia-500 to-cyan-500"}  md:pb-[90px] lg:pb-[100px]`}
       >
         <Navbar />
         <div className="container mx-auto px-4 lg:py-[100px] py-[180px]">

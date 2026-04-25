@@ -64,7 +64,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      await signOut(auth());
       dispatch(logOutUser());
       navigate("/auth");
     } catch (error) {
@@ -109,8 +109,8 @@ const Navbar = () => {
                   <div>
                     {userDetails?.displayName ? (
                       <details className="dropdown ">
-                        <summary className="btn m-0 bg-transparent shadow-none">
-                          <LuUser className="text-lg" />
+                        <summary className="btn border-0 p-0 m-0 bg-transparent shadow-none">
+                          <LuUser className="lg:text-2xl text-[25px]" />
                         </summary>
                         <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                           <li>
@@ -129,7 +129,7 @@ const Navbar = () => {
                         </ul>
                       </details>
                     ) : (
-                      <FaRegUser
+                      <LuUser
                         onClick={() => navigate("/auth")}
                         className="lg:text-2xl text-[25px] cursor-pointer hover:text-orange transition-all ease-in-out duration-200"
                       />
