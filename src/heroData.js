@@ -3,6 +3,7 @@ import contactImage from "./assets/images/Contact.png";
 import aboutus from "./assets/images/Aboutus.png";
 import productsImage from "./assets/images/products.png";
 import cartImage from "./assets/images/cartImage.png";
+import bannerimage from "./assets/images/bannerimage.png";
 
 export const heroData = {
   home: {
@@ -12,7 +13,7 @@ export const heroData = {
       "Discover top-tier products from world-class brands. Quality you trust, prices you love.",
     primaryBtn: "Shop Now",
     secondaryBtn: "Explore More",
-    image: homebannerright,
+    image: bannerimage,
   },
   about: {
     subHeading: "Our Journey",
@@ -21,7 +22,7 @@ export const heroData = {
       "We are committed to bringing you the finest selection of global brands with a seamless shopping experience.",
     primaryBtn: "Read More",
     secondaryBtn: "Our Team",
-    image: aboutus,
+    image: bannerimage,
   },
   products: {
     subHeading: "Exclusive Collection",
@@ -30,7 +31,7 @@ export const heroData = {
       "Browse through our wide range of premium products designed to elevate your lifestyle.",
     primaryBtn: "View All",
     secondaryBtn: "Top Rated",
-    image: productsImage,
+    image: bannerimage,
   },
   contact: {
     subHeading: "Get In Touch",
@@ -39,7 +40,7 @@ export const heroData = {
       "Have questions? Our support team is available 24/7 to assist you with your orders and inquiries.",
     primaryBtn: "Contact Us",
     secondaryBtn: "FAQs",
-    image: contactImage,
+    image: bannerimage,
   },
   cart: {
     subHeading: "Your Selections",
@@ -48,7 +49,7 @@ export const heroData = {
       "Review your items and apply any available coupons for extra discounts.",
     primaryBtn: "Checkout Now",
     secondaryBtn: "Back to Shop",
-    image: cartImage,
+    image: bannerimage,
   },
   productsByCategory: {
     subHeading: "Your Selections",
@@ -57,6 +58,6 @@ export const heroData = {
       "Review your items and apply any available coupons for extra discounts.",
     primaryBtn: "Checkout Now",
     secondaryBtn: "Back to Shop",
-    image: cartImage,
+    image: bannerimage,
   },
 };

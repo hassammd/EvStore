@@ -269,7 +269,11 @@ const DashBoard = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-slate-500 font-medium">
-                        April 22, 2026
+                        {items.createdAt.toDate().toLocaleDateString("en-us", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
                       </td>
                       <td className="px-6 py-4">
                         <span className="text-sm font-black text-slate-900 font-semibold">

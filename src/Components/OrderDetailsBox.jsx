@@ -13,18 +13,28 @@ const OrderDetailsBox = ({ setIsActiveBox, selectedOrder }) => {
   console.log("this is total:", totalAmount);
   return (
     // Backdrop (Black overlay)
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[999] p-4">
+    <div
+      onClick={() => setIsActiveBox(false)}
+      className="cursor-pointer fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[999] p-4"
+    >
       {/* Modal Box */}
       <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-200">
         {/* Header */}
         <div className="bg-[#2A528A] p-6 text-white flex justify-between items-center">
           <div>
-            <h2 className="text-xl font-bold">Order #ORD-7721</h2>
-            <p className="text-xs opacity-80">Placed on April 22, 2026</p>
+            <h2 className="text-xl font-bold  ">
+              Order{" "}
+              <span className="text-orange">
+                #{selectedOrder.id.slice(0, 8)}
+              </span>
+            </h2>
+            <p className="text-white text-xs opacity-80">
+              Placed on {selectedOrder.createdAt.toDate().toLocaleDateString()}
+            </p>
           </div>
           <button
             onClick={() => setIsActiveBox(false)}
-            className="bg-white/20 hover:bg-white/40 p-2 rounded-full transition"
+            className="bg-white/20 cursor-pointer hover:bg-white/40 p-2 rounded-full transition"
           >
             <IoClose className="text-2xl" />
           </button>
@@ -48,7 +58,12 @@ const OrderDetailsBox = ({ setIsActiveBox, selectedOrder }) => {
               </div>
               <p>{selectedOrder.customerDetails.email}</p>
               <p>{selectedOrder.customerDetails.phone}</p>
-              <p className="mt-2 italic">Lahore, Punjab, Pakistan</p>
+              <div className="flex flex-row gap-1 mt-2 ">
+                <p>House No#</p>
+                <p> {selectedOrder.customerDetails.address.house}</p>
+                <p>{selectedOrder.customerDetails.address.city}</p>
+                <p>{selectedOrder.customerDetails.address.state},</p>
+              </div>
             </div>
           </div>
 

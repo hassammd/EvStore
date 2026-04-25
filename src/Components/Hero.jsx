@@ -27,31 +27,37 @@ const Hero = ({ data }) => {
   } = data;
   return (
     <>
-      <div
-        className={`${isDark ? "bg-base-200" : "bg-gradient-to-r from-fuchsia-500 to-cyan-500"}  md:pb-[90px] lg:pb-[100px]`}
-      >
+      <div className={`${isDark ? "bg-base-200" : "bg-[#E0F2FE]"}  `}>
         <Navbar />
-        <div className="container mx-auto px-4 lg:py-[100px] py-[180px]">
-          <div className="flex flex-col-reverse md:flex-row justify-between gap-2 items-center">
-            <div className="lg:w-1/2 md:w-1/2 w-full flex flex-col gap-5 items-center md:items-start">
-              <span className="text-blue-500 text-lg">{subHeading}</span>
-              <h1 className="font-bold md:text-left text-center">
+        <div className="container mx-auto px-10">
+          <div className=" pt-[110px] pb-[80px] flex flex-col-reverse lg:flex-row justify-between gap-8 items-center">
+            {/* Text Column: Mobile par Center, Desktop par Left */}
+            <div className="lg:w-1/2 w-full flex flex-col items-center lg:items-start text-center lg:text-left gap-5">
+              <span className="text-blue-500 text-lg font-medium">
+                {subHeading}
+              </span>
+
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold  ">
                 {mainHeading}
               </h1>
+
               <p
-                className={` ${isDark ? "text-gray" : ""} text-center md:text-left`}
+                className={`max-w-xl ${isDark ? "text-gray-400" : "text-gray-600"}`}
               >
                 {description}
               </p>
-              <button className=" text-white hover:-translate-y-1 transition duration-300 lg:block uppercase bg-orange py-3 px-10 rounded-sm cursor-pointer">
+
+              <button className="text-white hover:-translate-y-1 transition duration-300 uppercase bg-orange py-3 px-10 rounded-full cursor-pointer shadow-lg">
                 Shop Now
               </button>
             </div>
-            <div className="lg:w-1/2 md:w-1/2  flex text-center">
+
+            {/* Image Column: Mobile par Image pehle dikhayega (reverse logic ki wajah se) */}
+            <div className="lg:w-1/2 w-full flex justify-center items-center">
               <img
-                className="w-full animate-float  duration-1000"
+                className="w-[90%] md:w-[70%] lg:w-auto  drop-shadow-xl"
                 src={image}
-                alt=""
+                alt="Hero"
               />
             </div>
           </div>

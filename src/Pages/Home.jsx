@@ -20,6 +20,7 @@ const Home = () => {
   return (
     <>
       <Hero data={heroData.home} />
+
       <div className="lg:py-[100px] md:py-[90px] sm:py-[70px] py-[50px] ">
         <div className="container mx-auto px-4">
           <h2

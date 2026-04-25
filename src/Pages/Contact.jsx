@@ -54,6 +54,7 @@ const Contact = () => {
   return (
     <>
       <Hero data={heroData.contact} />
+
       {/* contact form */}
 
       <div className="py-[100px] container mx-auto px-4">

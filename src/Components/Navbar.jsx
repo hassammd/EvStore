@@ -75,9 +75,9 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`w-full fixed top-0 z-30 ${isScrolled ? "bg-base-200 shadow-sm" : "bg-transparent"} `}
+        className={`w-full fixed top-0 z-50 ${isScrolled ? "bg-base-200 shadow-sm" : "bg-transparent"} `}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-10">
           <nav className="flex justify-between items-center py-5">
             <div>
               <Link to={"/"}>

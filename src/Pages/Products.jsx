@@ -65,6 +65,7 @@ const Products = () => {
   return (
     <>
       <Hero data={heroData.products} />
+
       <div className="lg:py-[100px] md:py-[90px] sm:py-[70px] py-[50px] ">
         <div className="container mx-auto px-4">
           <h2 className="text-xl md:text-3xl text-center lg:mb-20 md:mb-15 sm:mb-15 mb-10   tracking-tight">
